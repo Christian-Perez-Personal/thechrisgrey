@@ -48,7 +48,7 @@ const About = () => {
                 </p>
 
                 <div className="bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30">
-                  <h3 className="text-lg font-semibold text-white mb-4">Key Qualifications</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">Military Qualifications</h3>
                   <ul className="space-y-2">
                     <li className="flex items-center">
                       <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,6 +73,24 @@ const About = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       Foreign Internal Defense Operations
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30">
+                  <h3 className="text-lg font-semibold text-white mb-4">Professional Certifications</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center">
+                      <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      AWS Cloud Practitioner
+                    </li>
+                    <li className="flex items-center">
+                      <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      AWS AI Practitioner
                     </li>
                   </ul>
                 </div>

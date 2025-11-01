@@ -117,4 +117,4 @@ This is a personal website project. For inquiries or suggestions, please use the
 
 ## License
 
-Copyright © 2024 Christian Perez. All rights reserved.
+Copyright © 2025 Christian Perez. All rights reserved.

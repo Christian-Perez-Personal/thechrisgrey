@@ -41,13 +41,13 @@ const Podcast = () => {
             <div className="h-1 w-24 bg-altivum-gold mb-8"></div>
 
             <p className="text-2xl md:text-3xl text-altivum-silver leading-relaxed mb-8">
-              Conversations with leaders, innovators, and veterans
+              AI applications across defense and local business sectors
             </p>
 
             <p className="text-xl text-altivum-silver leading-relaxed">
-              The Vector Podcast explores the intersection of military experience, technology innovation,
-              and leadership. Each episode features in-depth conversations with individuals who are
-              navigating complexity and driving meaningful change in their fields.
+              The Vector Podcast explores how artificial intelligence is transforming both defense
+              technology and small business operations. Each episode delivers practical insights on
+              AI implementation, from military innovation to Main Street commerce.
             </p>
           </div>
         </div>
@@ -64,8 +64,8 @@ const Podcast = () => {
               <div className="h-1 w-16 bg-altivum-gold"></div>
 
               <p className="text-xl text-altivum-silver leading-relaxed">
-                The Vector Podcast is designed for leaders, entrepreneurs, and anyone interested in
-                understanding how diverse experiences shape innovative thinking and effective leadership.
+                The Vector Podcast is designed for small business owners, defense professionals, veterans,
+                and anyone interested in leveraging AI to drive innovation and operational excellence.
               </p>
 
               <div className="space-y-4">
@@ -120,31 +120,31 @@ const Podcast = () => {
               <ul className="space-y-3">
                 <li className="flex items-center text-altivum-silver">
                   <span className="text-altivum-gold mr-3">→</span>
-                  Leadership in high-pressure environments
+                  AI applications in defense technology
                 </li>
                 <li className="flex items-center text-altivum-silver">
                   <span className="text-altivum-gold mr-3">→</span>
-                  Veteran transition and career development
+                  Machine learning for small businesses
                 </li>
                 <li className="flex items-center text-altivum-silver">
                   <span className="text-altivum-gold mr-3">→</span>
-                  Cloud technology and AI innovation
+                  Cloud infrastructure and AI integration
                 </li>
                 <li className="flex items-center text-altivum-silver">
                   <span className="text-altivum-gold mr-3">→</span>
-                  Entrepreneurship and small business growth
+                  Veteran entrepreneurship in tech
                 </li>
                 <li className="flex items-center text-altivum-silver">
                   <span className="text-altivum-gold mr-3">→</span>
-                  Mental health and resilience
+                  Military innovation and commercial application
                 </li>
                 <li className="flex items-center text-altivum-silver">
                   <span className="text-altivum-gold mr-3">→</span>
-                  Team building and organizational culture
+                  AI-powered business automation
                 </li>
                 <li className="flex items-center text-altivum-silver">
                   <span className="text-altivum-gold mr-3">→</span>
-                  Strategic thinking and decision-making
+                  Defense contracting and technology
                 </li>
               </ul>
             </div>

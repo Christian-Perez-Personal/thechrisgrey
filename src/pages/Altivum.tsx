@@ -24,14 +24,30 @@ const Altivum = () => {
             <div className="h-1 w-24 bg-altivum-gold mb-8"></div>
 
             <p className="text-2xl md:text-3xl text-altivum-silver leading-relaxed mb-8">
-              Empowering veterans and small businesses through cloud migration and AI integration
+              Cloud-native AI integration for small businesses
             </p>
 
-            <p className="text-xl text-altivum-silver leading-relaxed">
-              As a Public Benefit Corporation, Altivum Inc. exists to serve those who have served,
-              and to democratize access to cutting-edge technology for small businesses that drive
-              our economy.
+            <p className="text-xl text-altivum-silver leading-relaxed mb-6">
+              Founded in February 2025 and headquartered in Clarksville, Tennessee, Altivum Inc. is a
+              veteran-founded Public Benefit Corporation dedicated to serving those who have served
+              and democratizing access to cutting-edge cloud and AI technology for small businesses.
             </p>
+
+            <div className="flex flex-wrap gap-4">
+              <div className="inline-flex items-center px-4 py-2 bg-altivum-navy/50 rounded-md border border-altivum-slate/30">
+                <svg className="w-5 h-5 text-altivum-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span className="text-altivum-silver text-sm font-medium">SDVOSB Certified</span>
+              </div>
+              <div className="inline-flex items-center px-4 py-2 bg-altivum-navy/50 rounded-md border border-altivum-slate/30">
+                <svg className="w-5 h-5 text-altivum-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span className="text-altivum-silver text-sm font-medium">Clarksville, TN</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -99,222 +115,200 @@ const Altivum = () => {
         </div>
       </section>
 
-      {/* Services */}
+      {/* Products & Services */}
       <section className="py-24 bg-altivum-navy">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
-              Our Services
+              Products & Services
             </h2>
             <div className="h-1 w-24 bg-altivum-gold mx-auto mb-6"></div>
             <p className="text-xl text-altivum-silver max-w-3xl mx-auto">
-              Comprehensive solutions designed to accelerate your digital transformation
+              Four core offerings designed to empower veterans and small businesses
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Cloud Migration */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Altivum Logic */}
             <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
-              <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                </svg>
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center">
+                  <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                  </svg>
+                </div>
+                <a
+                  href="https://logic.altivum.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-altivum-gold hover:text-altivum-gold/80 text-sm font-medium"
+                >
+                  Visit Site →
+                </a>
               </div>
               <h3 className="text-2xl font-display font-bold text-white mb-4">
-                Cloud Migration
+                Altivum Logic™
               </h3>
               <p className="text-altivum-silver leading-relaxed mb-6">
-                Seamless transition to AWS cloud infrastructure with minimal downtime
-                and maximum efficiency. We handle the complexity so you can focus on growth.
+                Multicloud infrastructure and web development services. Save 50-70% compared to traditional website platforms while accessing enterprise-grade infrastructure.
               </p>
-              <ul className="space-y-2 text-sm">
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-3">Services & Pricing</h4>
+                <ul className="space-y-2 text-sm">
+                  <li className="flex items-start text-altivum-silver">
+                    <span className="text-altivum-gold mr-2">•</span>
+                    Website Development - From $600
+                  </li>
+                  <li className="flex items-start text-altivum-silver">
+                    <span className="text-altivum-gold mr-2">•</span>
+                    Cloud Migration - $500-700
+                  </li>
+                  <li className="flex items-start text-altivum-silver">
+                    <span className="text-altivum-gold mr-2">•</span>
+                    Managed Hosting - $20/month
+                  </li>
+                  <li className="flex items-start text-altivum-silver">
+                    <span className="text-altivum-gold mr-2">•</span>
+                    AI Integration - From $1,500
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-4 border-t border-altivum-slate/30">
+                <p className="text-xs text-altivum-silver">
+                  <span className="font-semibold">Platforms:</span> AWS, IBM Cloud, Google Cloud
+                </p>
+              </div>
+            </div>
+
+            {/* Altivum Vanguard */}
+            <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center">
+                  <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-2xl font-display font-bold text-white mb-4">
+                Altivum Vanguard
+              </h3>
+              <p className="text-altivum-silver leading-relaxed mb-6">
+                AI-powered hiring software with specialized focus on veteran recruitment. Streamline your hiring process while supporting veteran employment.
+              </p>
+              <ul className="space-y-2 text-sm mb-6">
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  Assessment & Planning
+                  Veteran-focused candidate matching
                 </li>
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  Infrastructure Design
+                  AI-powered resume screening
                 </li>
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  Migration Execution
+                  Skills translation for military experience
                 </li>
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  Post-Migration Optimization
+                  Automated applicant tracking
+                </li>
+              </ul>
+              <div className="pt-4 border-t border-altivum-slate/30">
+                <p className="text-xs text-altivum-silver italic">
+                  Coming Soon
+                </p>
+              </div>
+            </div>
+
+            {/* VetROI */}
+            <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center">
+                  <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <a
+                  href="https://vetroi.altivum.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-altivum-gold hover:text-altivum-gold/80 text-sm font-medium"
+                >
+                  Learn More →
+                </a>
+              </div>
+              <h3 className="text-2xl font-display font-bold text-white mb-4">
+                VetROI™
+              </h3>
+              <p className="text-altivum-silver leading-relaxed mb-6">
+                AI-powered veteran career transition tool. Navigate the transition from military to civilian careers with data-driven insights and personalized guidance.
+              </p>
+              <ul className="space-y-2 text-sm mb-6">
+                <li className="flex items-start text-altivum-silver">
+                  <span className="text-altivum-gold mr-2">•</span>
+                  Career pathway recommendations
+                </li>
+                <li className="flex items-start text-altivum-silver">
+                  <span className="text-altivum-gold mr-2">•</span>
+                  Skills assessment and translation
+                </li>
+                <li className="flex items-start text-altivum-silver">
+                  <span className="text-altivum-gold mr-2">•</span>
+                  Job market analysis
+                </li>
+                <li className="flex items-start text-altivum-silver">
+                  <span className="text-altivum-gold mr-2">•</span>
+                  Personalized transition planning
                 </li>
               </ul>
             </div>
 
-            {/* AI Integration */}
+            {/* Altivum Press */}
             <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
-              <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center">
+                  <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <a
+                  href="https://www.youtube.com/@AltivumPress"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-altivum-gold hover:text-altivum-gold/80 text-sm font-medium"
+                >
+                  Watch →
+                </a>
               </div>
               <h3 className="text-2xl font-display font-bold text-white mb-4">
-                AI Integration
+                Altivum Press
               </h3>
               <p className="text-altivum-silver leading-relaxed mb-6">
-                Harness the power of artificial intelligence to automate processes,
-                gain insights, and create competitive advantages in your market.
+                Educational content addressing defense technology and AI applications. Bridging the gap between military innovation and commercial technology.
               </p>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-2 text-sm mb-6">
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  AI Strategy Development
+                  Defense technology insights
                 </li>
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  Machine Learning Models
+                  AI implementation tutorials
                 </li>
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  Natural Language Processing
+                  Cloud infrastructure guides
                 </li>
                 <li className="flex items-start text-altivum-silver">
                   <span className="text-altivum-gold mr-2">•</span>
-                  Predictive Analytics
+                  Veteran tech career resources
                 </li>
               </ul>
-            </div>
-
-            {/* DevOps & CI/CD */}
-            <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
-              <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
+              <div className="pt-4 border-t border-altivum-slate/30">
+                <p className="text-xs text-altivum-silver">
+                  <span className="font-semibold">Platform:</span> YouTube, Educational Content
+                </p>
               </div>
-              <h3 className="text-2xl font-display font-bold text-white mb-4">
-                DevOps & CI/CD
-              </h3>
-              <p className="text-altivum-silver leading-relaxed mb-6">
-                Streamline your development pipeline with automated testing, deployment,
-                and infrastructure management practices.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Pipeline Automation
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Infrastructure as Code
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Container Orchestration
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Monitoring & Logging
-                </li>
-              </ul>
-            </div>
-
-            {/* Security & Compliance */}
-            <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
-              <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-bold text-white mb-4">
-                Security & Compliance
-              </h3>
-              <p className="text-altivum-silver leading-relaxed mb-6">
-                Military-grade security practices ensure your data and systems remain
-                protected against evolving threats and meet regulatory requirements.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Security Audits
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Compliance Management
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Threat Detection
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Incident Response
-                </li>
-              </ul>
-            </div>
-
-            {/* Training & Support */}
-            <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
-              <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-bold text-white mb-4">
-                Training & Support
-              </h3>
-              <p className="text-altivum-silver leading-relaxed mb-6">
-                Comprehensive training programs and ongoing support ensure your team
-                maximizes the value of your technology investments.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Technical Training
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Best Practices Workshops
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  24/7 Support Services
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Documentation & Resources
-                </li>
-              </ul>
-            </div>
-
-            {/* Veteran Programs */}
-            <div className="bg-altivum-dark p-8 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
-              <div className="w-16 h-16 bg-altivum-gold/20 rounded-lg flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-display font-bold text-white mb-4">
-                Veteran Programs
-              </h3>
-              <p className="text-altivum-silver leading-relaxed mb-6">
-                Specialized services and career transition support for veterans entering
-                the technology sector or starting their own businesses.
-              </p>
-              <ul className="space-y-2 text-sm">
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Career Transition Consulting
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Technical Skills Training
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Mentorship Programs
-                </li>
-                <li className="flex items-start text-altivum-silver">
-                  <span className="text-altivum-gold mr-2">•</span>
-                  Business Development Support
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -342,12 +336,12 @@ const Altivum = () => {
             </div>
 
             <div className="text-center">
-              <div className="text-5xl font-bold text-altivum-gold mb-4">24/7</div>
+              <div className="text-5xl font-bold text-altivum-gold mb-4">SDVOSB</div>
               <h3 className="text-xl font-display font-semibold text-white mb-2">
-                Support
+                Certified
               </h3>
               <p className="text-altivum-silver">
-                Always-available assistance when you need it most
+                Service-Disabled Veteran-Owned Small Business certification
               </p>
             </div>
 
@@ -373,12 +367,20 @@ const Altivum = () => {
           <p className="text-xl text-altivum-silver mb-8">
             Let's discuss how Altivum Inc. can help you achieve your technology goals.
           </p>
-          <Link
-            to="/contact"
-            className="inline-block px-8 py-4 bg-altivum-gold text-altivum-dark font-semibold rounded-md hover:bg-altivum-gold/90 transition-all duration-200 shadow-lg hover:shadow-xl"
-          >
-            Schedule a Consultation
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/contact"
+              className="inline-block px-8 py-4 bg-altivum-gold text-altivum-dark font-semibold rounded-md hover:bg-altivum-gold/90 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Schedule a Consultation
+            </Link>
+            <a
+              href="tel:+16152199425"
+              className="inline-block px-8 py-4 bg-transparent border-2 border-altivum-gold text-altivum-gold font-semibold rounded-md hover:bg-altivum-gold/10 transition-all duration-200"
+            >
+              Call (615) 219-9425
+            </a>
+          </div>
         </div>
       </section>
     </div>

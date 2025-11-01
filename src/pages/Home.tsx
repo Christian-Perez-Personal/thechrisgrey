@@ -105,8 +105,8 @@ const Home = () => {
                 The Vector Podcast
               </h3>
               <p className="text-altivum-silver leading-relaxed mb-6">
-                Conversations with leaders, innovators, and veterans on navigating complexity
-                and driving meaningful change.
+                Exploring AI applications across defense technology and local business sectors,
+                from military innovation to Main Street commerce.
               </p>
               <Link
                 to="/podcast"

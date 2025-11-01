@@ -103,8 +103,61 @@ const Contact = () => {
 
               {/* Contact Cards */}
               <div className="space-y-4">
-                {/* Altivum Inc. */}
-                <div className="bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300">
+                {/* Phone */}
+                <a
+                  href="tel:+16152199425"
+                  className="block bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300"
+                >
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-altivum-gold/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                      <svg className="w-6 h-6 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-2">
+                        Phone
+                      </h3>
+                      <p className="text-altivum-gold text-sm font-medium">
+                        (615) 219-9425
+                      </p>
+                      <p className="text-altivum-silver text-sm mt-1">
+                        Monday-Friday, 9 AM-5 PM CST
+                      </p>
+                    </div>
+                  </div>
+                </a>
+
+                {/* Altivum Inc. Email */}
+                <a
+                  href="mailto:info@altivum.ai"
+                  className="block bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300"
+                >
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 bg-altivum-gold/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                      <svg className="w-6 h-6 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-2">
+                        General Inquiries
+                      </h3>
+                      <p className="text-altivum-gold text-sm font-medium">
+                        info@altivum.ai
+                      </p>
+                      <p className="text-altivum-silver text-sm mt-1">
+                        For general questions and information
+                      </p>
+                    </div>
+                  </div>
+                </a>
+
+                {/* Altivum Logic Email */}
+                <a
+                  href="mailto:logic@altivum.ai"
+                  className="block bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300"
+                >
                   <div className="flex items-start">
                     <div className="w-12 h-12 bg-altivum-gold/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                       <svg className="w-6 h-6 text-altivum-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,14 +166,17 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-2">
-                        Altivum Inc. Business Inquiries
+                        Altivum Logic Services
                       </h3>
-                      <p className="text-altivum-silver text-sm">
-                        For cloud migration, AI integration, or veteran services
+                      <p className="text-altivum-gold text-sm font-medium">
+                        logic@altivum.ai
+                      </p>
+                      <p className="text-altivum-silver text-sm mt-1">
+                        Cloud migration, web development, AI integration
                       </p>
                     </div>
                   </div>
-                </div>
+                </a>
 
                 {/* LinkedIn */}
                 <a
