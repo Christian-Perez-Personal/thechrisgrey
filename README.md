@@ -1,10 +1,10 @@
-# Christopher Perez - Personal Website
+# Christian Perez - Personal Website
 
 A modern, sophisticated personal website built with React, Vite, and Tailwind CSS, showcasing leadership, innovation, and service.
 
 ## About
 
-This website serves as a digital presence for Christopher Perez - Founder & CEO of Altivum Inc., former Green Beret (18D Special Forces Medical Sergeant), Bronze Star Recipient, host of The Vector Podcast, and author of Beyond the Assessment.
+This website serves as a digital presence for Christian Perez - Founder & CEO of Altivum Inc., former Green Beret (18D Special Forces Medical Sergeant), Bronze Star Recipient, host of The Vector Podcast, and author of Beyond the Assessment.
 
 ## Technology Stack
 
@@ -117,4 +117,4 @@ This is a personal website project. For inquiries or suggestions, please use the
 
 ## License
 
-Copyright © 2024 Christopher Perez. All rights reserved.
+Copyright © 2024 Christian Perez. All rights reserved.

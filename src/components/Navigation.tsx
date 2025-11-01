@@ -36,7 +36,7 @@ const Navigation = () => {
           {/* Logo/Name */}
           <Link to="/" className="flex items-center space-x-2">
             <span className="text-2xl font-display font-bold tracking-tight text-white">
-              CHRISTOPHER <span className="text-altivum-gold">PEREZ</span>
+              CHRISTIAN <span className="text-altivum-gold">PEREZ</span>
             </span>
           </Link>
 

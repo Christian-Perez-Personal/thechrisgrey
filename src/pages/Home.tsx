@@ -48,7 +48,7 @@ const Home = () => {
               <div className="relative overflow-hidden rounded-lg shadow-2xl">
                 <img
                   src={profileImage}
-                  alt="Christopher Perez"
+                  alt="Christian Perez"
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-altivum-dark/50 to-transparent"></div>
@@ -154,7 +154,7 @@ const Home = () => {
             <div className="relative">
               <img
                 src={readingImage}
-                alt="Christopher Perez with Beyond the Assessment"
+                alt="Christian Perez with Beyond the Assessment"
                 className="rounded-lg shadow-2xl"
               />
             </div>

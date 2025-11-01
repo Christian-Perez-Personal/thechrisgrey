@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h3 className="text-xl font-display font-bold text-white mb-4">
-              Christopher Perez
+              Christian Perez
             </h3>
             <p className="text-altivum-silver text-sm leading-relaxed">
               Founder & CEO of Altivum Inc., Former Green Beret, Bronze Star Recipient,
@@ -82,7 +82,7 @@ const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-altivum-slate/30">
           <p className="text-center text-altivum-silver text-sm">
-            &copy; {currentYear} Christopher Perez. All rights reserved.
+            &copy; {currentYear} Christian Perez. All rights reserved.
           </p>
         </div>
       </div>

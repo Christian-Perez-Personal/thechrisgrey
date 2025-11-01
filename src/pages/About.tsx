@@ -83,14 +83,14 @@ const About = () => {
               <div className="relative overflow-hidden rounded-lg shadow-2xl">
                 <img
                   src={horseSoldier}
-                  alt="Christopher Perez as Special Forces soldier on horseback"
+                  alt="Christian Perez as Special Forces soldier on horseback"
                   className="w-full h-auto object-cover"
                 />
               </div>
               <div className="relative overflow-hidden rounded-lg shadow-2xl">
                 <img
                   src={afg}
-                  alt="Christopher Perez in Afghanistan mountains"
+                  alt="Christian Perez in Afghanistan mountains"
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-altivum-dark/90 to-transparent p-6">
