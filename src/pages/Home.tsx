@@ -22,10 +22,10 @@ const Home = () => {
 
   const keyPoints = [
     { title: "Personal Biography", subtitle: "Christian Perez", link: "/about" },
-    { title: "Founder & CEO", subtitle: "Altivum Inc", link: "/altivum" },
-    { title: "Host", subtitle: "The Vector Podcast", link: "/podcast" },
-    { title: "Author", subtitle: "Beyond the Assessment", link: null },
-    { title: "Former Green Beret", subtitle: "18D", link: null }
+    { title: "Altivum Inc", subtitle: "Founder & CEO", link: "/altivum" },
+    { title: "The Vector Podcast", subtitle: "Host", link: "/podcast" },
+    { title: "Beyond the Assessment", subtitle: "Author", link: null },
+    { title: "Military Background", subtitle: "Former Green Beret, 18D", link: null }
   ];
 
   return (
@@ -79,7 +79,7 @@ const Home = () => {
                     <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">
                       {point.title}
                     </h3>
-                    <p className="text-lg md:text-xl text-altivum-gold font-medium">
+                    <p className="text-lg md:text-xl text-altivum-gold font-medium italic">
                       {point.subtitle}
                     </p>
                   </Link>
@@ -88,7 +88,7 @@ const Home = () => {
                     <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">
                       {point.title}
                     </h3>
-                    <p className="text-lg md:text-xl text-altivum-gold font-medium">
+                    <p className="text-lg md:text-xl text-altivum-gold font-medium italic">
                       {point.subtitle}
                     </p>
                   </div>
