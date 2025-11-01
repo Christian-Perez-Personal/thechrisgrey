@@ -8,7 +8,9 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      // Nav becomes solid after hero + summary sections (100vh + 200vh = 300vh)
+      const summaryEndPosition = window.innerHeight * 3;
+      setIsScrolled(window.scrollY > summaryEndPosition);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);

@@ -5,15 +5,15 @@ import readingImage from '../assets/reading.jpeg';
 import heroImage from '../assets/hero2.png';
 
 const Home = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(-1);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
-      // Calculate progress through the sticky section (0-4 for 4 key points)
-      const progress = Math.min(Math.floor((scrollPosition - windowHeight) / (windowHeight * 0.4)), 3);
-      setScrollProgress(Math.max(0, progress));
+      // Calculate which key points should be visible (-1 to 3, where -1 means none visible)
+      const progress = Math.min(Math.floor((scrollPosition - windowHeight) / (windowHeight * 0.25)), 3);
+      setScrollProgress(Math.max(-1, progress));
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -47,8 +47,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sticky Profile Image Section with Scrolling Text */}
-      <section className="relative h-[400vh]">
+      {/* Sticky Profile Image Section with Scrolling Summary Tabs */}
+      <section className="relative h-[200vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="absolute inset-0">
             <img
@@ -59,28 +59,27 @@ const Home = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-altivum-dark/80 via-altivum-dark/40 to-transparent"></div>
           </div>
 
-          {/* Scrolling Key Points Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center px-6">
-              {keyPoints.map((point, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-1000 ${
-                    scrollProgress === index
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-10 absolute'
-                  }`}
-                >
-                  <h2 className="text-4xl md:text-6xl font-serif font-bold text-white leading-tight">
+          {/* Left-side Summary Tabs */}
+          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 px-6 lg:px-12 space-y-8">
+            {keyPoints.map((point, index) => (
+              <div
+                key={index}
+                className={`transition-all duration-700 ${
+                  index <= scrollProgress
+                    ? 'opacity-100 transform translate-x-0'
+                    : 'opacity-0 transform -translate-x-10'
+                }`}
+              >
+                <div className="border-l-4 border-altivum-gold pl-6 py-4">
+                  <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">
                     {point.split(' | ')[0]}
-                  </h2>
-                  <div className="h-1 w-24 bg-altivum-gold mx-auto my-4"></div>
-                  <p className="text-2xl md:text-3xl text-altivum-gold font-semibold">
+                  </h3>
+                  <p className="text-lg md:text-xl text-altivum-gold font-medium">
                     {point.split(' | ')[1]}
                   </p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
