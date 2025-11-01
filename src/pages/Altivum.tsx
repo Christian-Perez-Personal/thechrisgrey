@@ -5,12 +5,12 @@ const Altivum = () => {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative py-32 bg-gradient-to-br from-altivum-dark via-altivum-navy to-altivum-blue overflow-hidden">
+      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-altivum-dark via-altivum-navy to-altivum-blue overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#4A5A73_1px,transparent_1px),linear-gradient(to_bottom,#4A5A73_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
           <div className="max-w-4xl">
             <div className="inline-block px-4 py-2 bg-altivum-gold/20 rounded-md mb-6">
               <span className="text-altivum-gold font-semibold text-sm uppercase tracking-wider">
@@ -52,65 +52,63 @@ const Altivum = () => {
         </div>
       </section>
 
+      {/* Full Screen Image */}
+      <section className="relative h-screen overflow-hidden block">
+        <img
+          src={altivumImage}
+          alt="Altivum Inc. workspace"
+          className="w-full h-full object-cover block"
+          style={{ objectPosition: 'center 90%' }}
+        />
+      </section>
+
       {/* Mission Statement */}
       <section className="py-24 bg-altivum-dark">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">
-                Our Mission
-              </h2>
-              <div className="h-1 w-16 bg-altivum-gold"></div>
+          <div className="max-w-4xl">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+              Our Mission
+            </h2>
+            <div className="h-1 w-16 bg-altivum-gold mb-8"></div>
 
-              <p className="text-xl text-altivum-silver leading-relaxed">
-                Altivum Inc. bridges the technology gap for veterans transitioning to civilian careers
-                and small businesses seeking to compete in the digital age. We believe that everyone
-                deserves access to world-class cloud infrastructure and AI capabilities.
-              </p>
+            <p className="text-xl text-altivum-silver leading-relaxed mb-6">
+              Altivum Inc. bridges the technology gap for veterans transitioning to civilian careers
+              and small businesses seeking to compete in the digital age. We believe that everyone
+              deserves access to world-class cloud infrastructure and AI capabilities.
+            </p>
 
-              <p className="text-lg text-altivum-silver leading-relaxed">
-                Our team brings military precision and operational excellence to every engagement,
-                ensuring that technology serves as a force multiplier for growth and success.
-              </p>
+            <p className="text-lg text-altivum-silver leading-relaxed mb-12">
+              Our team brings military precision and operational excellence to every engagement,
+              ensuring that technology serves as a force multiplier for growth and success.
+            </p>
 
-              <div className="bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30">
-                <h3 className="text-lg font-semibold text-white mb-4">Core Values</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-center text-altivum-silver">
-                    <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Service before self
-                  </li>
-                  <li className="flex items-center text-altivum-silver">
-                    <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Excellence in execution
-                  </li>
-                  <li className="flex items-center text-altivum-silver">
-                    <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Accessibility for all
-                  </li>
-                  <li className="flex items-center text-altivum-silver">
-                    <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Innovation with purpose
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="relative">
-              <img
-                src={altivumImage}
-                alt="Altivum Inc. workspace"
-                className="rounded-lg shadow-2xl"
-              />
-            </div>
+            <h3 className="text-2xl font-display font-bold text-white mb-6">Core Values</h3>
+            <ul className="space-y-4">
+              <li className="flex items-center text-altivum-silver">
+                <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Service before self
+              </li>
+              <li className="flex items-center text-altivum-silver">
+                <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Excellence in execution
+              </li>
+              <li className="flex items-center text-altivum-silver">
+                <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Accessibility for all
+              </li>
+              <li className="flex items-center text-altivum-silver">
+                <svg className="w-5 h-5 text-altivum-gold mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Innovation with purpose
+              </li>
+            </ul>
           </div>
         </div>
       </section>

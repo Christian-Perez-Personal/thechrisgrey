@@ -10,9 +10,9 @@ const Home = () => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
-      // Calculate which key points should be visible (-1 to 3, where -1 means none visible)
-      // Points are evenly distributed across the 200vh summary section (every 50vh)
-      const progress = Math.min(Math.floor((scrollPosition - windowHeight) / (windowHeight * 0.5)), 3);
+      // Calculate which key points should be visible (-1 to 4, where -1 means none visible)
+      // Points are evenly distributed across the 400vh summary section (every 80vh)
+      const progress = Math.min(Math.floor((scrollPosition - windowHeight) / (windowHeight * 0.8)), 4);
       setScrollProgress(Math.max(-1, progress));
     };
 
@@ -21,6 +21,7 @@ const Home = () => {
   }, []);
 
   const keyPoints = [
+    { title: "Personal Biography", subtitle: "Christian Perez", link: "/about" },
     { title: "Founder & CEO", subtitle: "Altivum Inc", link: "/altivum" },
     { title: "Host", subtitle: "The Vector Podcast", link: "/podcast" },
     { title: "Author", subtitle: "Beyond the Assessment", link: null },
@@ -48,7 +49,7 @@ const Home = () => {
       </section>
 
       {/* Sticky Profile Image Section with Scrolling Summary Tabs */}
-      <section className="relative h-[300vh]">
+      <section className="relative h-[500vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="absolute inset-0">
             <img
