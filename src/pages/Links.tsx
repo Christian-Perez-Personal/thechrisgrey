@@ -1,3 +1,5 @@
+import builderQR from '../assets/builder-qr.png';
+
 const Links = () => {
   const websites = [
     {
@@ -21,6 +23,46 @@ const Links = () => {
   ];
 
   const personalSocials = [
+    {
+      name: 'AWS Builder',
+      handle: 'AWS Community Builder Profile',
+      url: 'https://builder.aws.com/profile',
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335c-.072.048-.144.071-.208.071-.08 0-.16-.04-.239-.112-.112-.12-.207-.247-.279-.391-.072-.144-.144-.304-.224-.495-.56.659-1.263.99-2.135.99-.615 0-1.103-.176-1.471-.519-.367-.344-.551-.815-.551-1.423 0-.631.224-1.143.687-1.543.463-.4 1.087-.6 1.88-.6.263 0 .535.023.832.064.296.04.6.104.912.176v-.583c0-.607-.127-1.031-.375-1.287-.255-.256-.695-.384-1.343-.384-.288 0-.583.032-.888.104-.303.071-.6.16-.888.263-.135.056-.224.095-.272.111-.047.016-.08.024-.104.024-.088 0-.135-.064-.135-.191v-.303c0-.096.016-.168.056-.215.04-.048.112-.096.2-.144.287-.144.632-.264 1.031-.36.4-.095.823-.143 1.271-.143.967 0 1.671.216 2.119.647.447.432.671 1.087.671 1.967v2.583zm-2.951 1.104c.255 0 .52-.048.8-.143.28-.096.527-.271.743-.52.128-.152.224-.32.272-.512.047-.191.08-.423.08-.695v-.335c-.24-.064-.495-.112-.767-.151-.272-.04-.536-.056-.792-.056-.56 0-.967.112-1.247.343-.28.232-.423.56-.423 1.003 0 .424.104.744.32.96.215.224.52.336.911.336zm5.183.943c-.112 0-.184-.016-.239-.056-.056-.04-.104-.12-.144-.215l-1.607-5.295c-.04-.127-.056-.215-.056-.263 0-.104.048-.16.152-.16h.615c.12 0 .2.016.247.056.056.04.096.12.135.215l1.151 4.535 1.071-4.535c.032-.127.072-.207.127-.247.056-.04.136-.056.256-.056h.503c.12 0 .2.016.256.056.055.04.104.12.127.247l1.087 4.591 1.183-4.591c.04-.127.088-.207.135-.247.056-.04.135-.056.247-.056h.584c.104 0 .16.056.16.16 0 .064-.008.127-.024.2-.016.071-.04.151-.08.263l-1.647 5.295c-.04.127-.088.207-.144.247-.056.04-.136.056-.239.056h-.544c-.12 0-.2-.016-.255-.056-.056-.04-.104-.12-.128-.247l-1.071-4.463-1.055 4.455c-.032.127-.072.207-.127.247-.056.04-.136.056-.256.056h-.544zm8.479.215c-.431 0-.863-.048-1.279-.143-.415-.096-.735-.2-.951-.32-.128-.071-.215-.151-.247-.223-.032-.072-.048-.151-.048-.224v-.311c0-.128.048-.192.143-.192.04 0 .08.008.12.024.04.016.104.048.168.08.303.136.631.247.984.311.36.064.711.096 1.063.096.6 0 1.063-.104 1.398-.32.336-.216.504-.52.504-.927 0-.272-.088-.503-.263-.695-.176-.192-.527-.368-1.055-.52l-1.511-.471c-.767-.24-1.335-.591-1.687-.991-.351-.4-.527-.871-.527-1.415 0-.407.088-.767.263-1.079.176-.312.415-.583.711-.807.296-.224.647-.392 1.047-.512.4-.12.832-.176 1.295-.176.183 0 .375.008.567.032.192.024.375.056.551.088.176.04.336.08.495.127.16.048.288.096.376.143.12.064.207.127.256.2.048.071.072.168.072.295v.287c0 .128-.048.2-.144.2-.056 0-.16-.04-.303-.096-.48-.216-1.007-.32-1.591-.32-.544 0-.967.088-1.271.272-.303.184-.455.455-.455.823 0 .272.096.511.288.719.191.208.559.391 1.103.551l1.479.471c.751.24 1.303.575 1.639.999.336.423.504.911.504 1.463 0 .416-.088.791-.256 1.111-.176.32-.415.6-.735.831-.312.232-.695.408-1.151.528-.447.112-.951.168-1.511.168z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Substack',
+      handle: '@thechrisgrey',
+      url: 'https://substack.com/@thechrisgrey',
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Linktree',
+      handle: '@thechrisgrey',
+      url: 'https://linktr.ee/thechrisgrey',
+      icon: (
+        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M7.953 15.066c-.08.163-.08.324-.08.486.08.517.528.897 1.052.89h1.294v4.776c0 .486-.404.89-.89.89H6.577a.898.898 0 0 1-.889-.891v-4.774H.992c-.728 0-1.214-.729-.89-1.377l6.96-12.627a1.065 1.065 0 0 1 1.863 0l2.913 5.585-3.885 7.042zm15.945 0-6.96-12.627a1.065 1.065 0 0 0-1.862 0l-2.995 5.586 3.885 7.04c.081.164.081.326.081.487-.08.517-.529.897-1.052.89h-1.296v4.776c0 .486.404.89.89.89h2.914c.486 0 .89-.404.89-.89v-4.775h4.612c.728 0 1.214-.729.89-1.377z"/>
+        </svg>
+      ),
+    },
+    {
+      name: 'Arizona State University',
+      handle: 'ASU Search Profile',
+      url: 'https://search.asu.edu/profile/3714457',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+        </svg>
+      ),
+    },
     {
       name: 'Facebook',
       handle: '@thechrisgrey',
@@ -159,8 +201,54 @@ const Links = () => {
         </div>
       </section>
 
-      {/* Websites Section */}
+      {/* AWS Builder Section with QR Code */}
       <section className="py-24 bg-altivum-dark">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-altivum-navy to-altivum-blue p-8 md:p-12 rounded-lg border border-altivum-slate/30">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div>
+                <div className="inline-block px-3 py-1 bg-altivum-gold/20 rounded text-xs font-medium text-altivum-gold mb-4">
+                  Featured
+                </div>
+                <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+                  AWS Community Builder
+                </h2>
+                <div className="h-1 w-16 bg-altivum-gold mb-6"></div>
+                <p className="text-altivum-silver leading-relaxed mb-6">
+                  Connect with me on AWS Builder to explore my cloud architecture projects,
+                  technical insights, and contributions to the AWS community.
+                </p>
+                <a
+                  href="https://builder.aws.com/profile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 bg-altivum-gold text-altivum-dark font-semibold rounded-md hover:bg-altivum-gold/90 transition-all duration-200"
+                >
+                  View Profile
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <div className="flex justify-center">
+                <div className="bg-white p-6 rounded-lg shadow-2xl">
+                  <img
+                    src={builderQR}
+                    alt="AWS Builder Profile QR Code"
+                    className="w-64 h-64 md:w-72 md:h-72"
+                  />
+                  <p className="text-center text-sm text-altivum-dark mt-4 font-medium">
+                    Scan to connect
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Websites Section */}
+      <section className="py-24 bg-altivum-navy">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
@@ -176,7 +264,7 @@ const Links = () => {
                 href={site.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block bg-altivum-navy p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300 group"
+                className="block bg-altivum-dark p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300 group"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
@@ -212,7 +300,7 @@ const Links = () => {
       </section>
 
       {/* Personal Social Media Section */}
-      <section className="py-24 bg-altivum-navy">
+      <section className="py-24 bg-altivum-dark">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
@@ -223,50 +311,6 @@ const Links = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {personalSocials.map((social) => (
-              <a
-                key={social.name + social.handle}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-altivum-dark p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300 group"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-altivum-gold/20 rounded-lg flex items-center justify-center text-altivum-gold group-hover:bg-altivum-gold group-hover:text-altivum-dark transition-all flex-shrink-0">
-                    {social.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-semibold text-white group-hover:text-altivum-gold transition-colors">
-                      {social.name}
-                    </h3>
-                    <p className="text-altivum-silver text-sm truncate">{social.handle}</p>
-                  </div>
-                  <svg
-                    className="w-5 h-5 text-altivum-silver group-hover:text-altivum-gold transition-colors flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Company Social Media Section */}
-      <section className="py-24 bg-altivum-dark">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
-              Company - Social Media
-            </h2>
-            <div className="h-1 w-16 bg-altivum-gold"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {companySocials.map((social) => (
               <a
                 key={social.name + social.handle}
                 href={social.url}
@@ -299,8 +343,52 @@ const Links = () => {
         </div>
       </section>
 
-      {/* Contact CTA */}
+      {/* Company Social Media Section */}
       <section className="py-24 bg-altivum-navy">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <div className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+              Company - Social Media
+            </h2>
+            <div className="h-1 w-16 bg-altivum-gold"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {companySocials.map((social) => (
+              <a
+                key={social.name + social.handle}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block bg-altivum-dark p-6 rounded-lg border border-altivum-slate/30 hover:border-altivum-gold/50 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-altivum-gold/20 rounded-lg flex items-center justify-center text-altivum-gold group-hover:bg-altivum-gold group-hover:text-altivum-dark transition-all flex-shrink-0">
+                    {social.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-semibold text-white group-hover:text-altivum-gold transition-colors">
+                      {social.name}
+                    </h3>
+                    <p className="text-altivum-silver text-sm truncate">{social.handle}</p>
+                  </div>
+                  <svg
+                    className="w-5 h-5 text-altivum-silver group-hover:text-altivum-gold transition-colors flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-24 bg-altivum-dark">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
             Want to Work Together?
