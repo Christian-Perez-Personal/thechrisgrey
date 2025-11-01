@@ -22,7 +22,7 @@ const Home = () => {
         window.requestAnimationFrame(() => {
           const scrollPosition = window.scrollY;
           const windowHeight = window.innerHeight;
-          // Mobile: 300vh section, show tabs every 50vh
+          // Mobile: 450vh section, show tabs every 50vh
           // Desktop: 500vh section, show tabs every 80vh
           const scrollInterval = isMobile ? 0.5 : 0.8;
           const progress = Math.min(Math.floor((scrollPosition - windowHeight) / (windowHeight * scrollInterval)), 4);
@@ -69,7 +69,7 @@ const Home = () => {
       </section>
 
       {/* Sticky Profile Image Section with Scrolling Summary Tabs */}
-      <section className="relative h-[300vh] md:h-[500vh]">
+      <section className="relative h-[450vh] md:h-[500vh]">
         <div className="sticky top-0 h-screen overflow-hidden" style={{ transform: 'translate3d(0,0,0)' }}>
           <div className="absolute inset-0">
             <img
