@@ -20,6 +20,7 @@ const Navigation = () => {
     { path: '/altivum', label: 'Altivum Inc.' },
     { path: '/podcast', label: 'The Vector Podcast' },
     { path: '/blog', label: 'Blog' },
+    { path: '/links', label: 'Links' },
     { path: '/contact', label: 'Contact' },
   ];
 
@@ -34,10 +35,15 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo/Name */}
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-display font-bold tracking-tight text-white">
-              CHRISTIAN <span className="text-altivum-gold">PEREZ</span>
-            </span>
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="flex flex-col">
+              <span className="text-2xl font-display font-bold tracking-tight text-white">
+                CHRISTIAN <span className="text-altivum-gold">PEREZ</span>
+              </span>
+              <span className="text-xs font-light text-altivum-silver tracking-wider">
+                @thechrisgrey
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

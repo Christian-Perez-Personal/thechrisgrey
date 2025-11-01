@@ -11,15 +11,14 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-altivum-dark via-altivum-navy to-altivum-blue opacity-50"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Text Content */}
+          <div className="max-w-4xl mx-auto text-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-tight">
                   Leadership
                   <span className="block text-altivum-gold">Forged in Service</span>
                 </h1>
-                <div className="h-1 w-24 bg-altivum-gold"></div>
+                <div className="h-1 w-24 bg-altivum-gold mx-auto"></div>
               </div>
 
               <p className="text-xl md:text-2xl text-altivum-silver leading-relaxed">
@@ -27,7 +26,7 @@ const Home = () => {
                 I bridge the gap between military precision and technological advancement.
               </p>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center">
                 <Link
                   to="/about"
                   className="inline-block px-8 py-4 bg-altivum-gold text-altivum-dark font-semibold rounded-md hover:bg-altivum-gold/90 transition-all duration-200 shadow-lg hover:shadow-xl"
@@ -42,19 +41,19 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-
-            {/* Image */}
-            <div className="relative">
-              <div className="relative overflow-hidden rounded-lg shadow-2xl">
-                <img
-                  src={profileImage}
-                  alt="Christian Perez"
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-altivum-dark/50 to-transparent"></div>
-              </div>
-            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Full-Height Profile Image Section */}
+      <section className="relative h-screen overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={profileImage}
+            alt="Christian Perez"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-altivum-dark via-transparent to-transparent"></div>
         </div>
       </section>
 

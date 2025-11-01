@@ -6,6 +6,7 @@ import About from './pages/About';
 import Altivum from './pages/Altivum';
 import Podcast from './pages/Podcast';
 import Blog from './pages/Blog';
+import Links from './pages/Links';
 import Contact from './pages/Contact';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/altivum" element={<Altivum />} />
         <Route path="/podcast" element={<Podcast />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/links" element={<Links />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
