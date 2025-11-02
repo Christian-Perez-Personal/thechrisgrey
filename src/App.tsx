@@ -9,6 +9,8 @@ import Podcast from './pages/Podcast';
 import Blog from './pages/Blog';
 import Links from './pages/Links';
 import Contact from './pages/Contact';
+import BeyondTheAssessment from './pages/BeyondTheAssessment';
+import MilitaryBackground from './pages/MilitaryBackground';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/altivum" element={<Altivum />} />
         <Route path="/podcast" element={<Podcast />} />
+        <Route path="/beyond-the-assessment" element={<BeyondTheAssessment />} />
+        <Route path="/military" element={<MilitaryBackground />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/links" element={<Links />} />
         <Route path="/contact" element={<Contact />} />

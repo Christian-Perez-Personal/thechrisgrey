@@ -44,8 +44,8 @@ const Home = () => {
     { title: "Personal Biography", subtitle: "Christian Perez", link: "/about" },
     { title: "Altivum Inc", subtitle: "Founder & CEO", link: "/altivum" },
     { title: "The Vector Podcast", subtitle: "Host", link: "/podcast" },
-    { title: "Beyond the Assessment", subtitle: "Author", link: null },
-    { title: "Military Background", subtitle: "Former Green Beret, 18D", link: null }
+    { title: "Beyond the Assessment", subtitle: "Author", link: "/beyond-the-assessment" },
+    { title: "Military Background", subtitle: "Former Green Beret, 18D", link: "/military" }
   ];
 
   return (

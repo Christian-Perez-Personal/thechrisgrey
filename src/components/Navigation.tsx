@@ -41,8 +41,8 @@ const Navigation = () => {
     { path: '/about', label: 'Personal Biography' },
     { path: '/altivum', label: 'Altivum Inc' },
     { path: '/podcast', label: 'The Vector Podcast' },
-    { path: null, label: 'Beyond the Assessment' },
-    { path: null, label: 'Military Background' },
+    { path: '/beyond-the-assessment', label: 'Beyond the Assessment' },
+    { path: '/military', label: 'Military Background' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

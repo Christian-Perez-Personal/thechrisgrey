@@ -1,3 +1,5 @@
+import tvpLogo from '../assets/tvp.png';
+
 const Podcast = () => {
   const episodes = [
     {
@@ -24,31 +26,21 @@ const Podcast = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-32 bg-gradient-to-br from-altivum-dark via-altivum-navy to-altivum-blue">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-4xl">
-            <div className="inline-block px-4 py-2 bg-altivum-gold/20 rounded-md mb-6">
-              <span className="text-altivum-gold font-semibold text-sm uppercase tracking-wider">
-                Podcast
-              </span>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden opacity-0 animate-fade-in">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-altivum-dark via-altivum-navy to-altivum-blue opacity-50"></div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-6 sm:mb-8">
+              <img
+                src={tvpLogo}
+                alt="The Vector Podcast"
+                className="w-full max-w-3xl mx-auto"
+              />
             </div>
-
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight">
-              The Vector Podcast
-            </h1>
-            <div className="h-1 w-24 bg-altivum-gold mb-8"></div>
-
-            <p className="text-2xl md:text-3xl text-altivum-silver leading-relaxed mb-8">
-              AI applications across defense and local business sectors
-            </p>
-
-            <p className="text-xl text-altivum-silver leading-relaxed">
-              The Vector Podcast explores how artificial intelligence is transforming both defense
-              technology and small business operations. Each episode delivers practical insights on
-              AI implementation, from military innovation to Main Street commerce.
-            </p>
           </div>
         </div>
       </section>

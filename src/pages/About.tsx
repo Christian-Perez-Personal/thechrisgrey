@@ -1,24 +1,25 @@
 import afg from '../assets/afg.png';
 import horseSoldier from '../assets/horse-soldier.jpeg';
 import readingImage from '../assets/reading.jpeg';
+import mpbLogo from '../assets/mpb.png';
 
 const About = () => {
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-24 bg-gradient-to-br from-altivum-dark to-altivum-navy">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">
-              From Special Forces to
-              <span className="block text-altivum-gold">Strategic Leadership</span>
-            </h1>
-            <div className="h-1 w-24 bg-altivum-gold mb-8"></div>
-            <p className="text-xl text-altivum-silver leading-relaxed">
-              My journey spans from the mountains of Afghanistan as a Green Beret to the forefront
-              of cloud technology and AI innovation, always driven by a commitment to serve
-              veterans and empower small businesses.
-            </p>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden opacity-0 animate-fade-in">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-altivum-dark via-altivum-navy to-altivum-blue opacity-50"></div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="mb-6 sm:mb-8">
+              <img
+                src={mpbLogo}
+                alt="My Personal Biography"
+                className="w-full max-w-3xl mx-auto"
+              />
+            </div>
           </div>
         </div>
       </section>
