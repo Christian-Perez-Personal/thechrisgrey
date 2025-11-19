@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+// import { useState } from 'react';
 import altivumImage from '../assets/altivum.jpg';
 import awsPartnerLogo from '../assets/aws-partner-dark.png';
 import altivumLogo from '../assets/altivum.png';
 import { typography } from '../utils/typography';
 
 const Altivum = () => {
-  const [expandedSection, setExpandedSection] = useState<number | null>(null);
-
-  const toggleSection = (index: number) => {
-    setExpandedSection(expandedSection === index ? null : index);
-  };
+  // const [expandedSection, setExpandedSection] = useState<number | null>(null);
+  // const toggleSection = (index: number) => {
+  //   setExpandedSection(expandedSection === index ? null : index);
+  // };
 
   const timelineItems = [
     {
@@ -183,19 +182,16 @@ const Altivum = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-altivum-dark">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden opacity-0 animate-fade-in">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-altivum-dark via-altivum-navy to-altivum-blue opacity-50"></div>
-
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden opacity-0 animate-fade-in">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-6 sm:mb-8">
               <img
                 src={altivumLogo}
                 alt="Altivum Inc."
-                className="w-full max-w-3xl mx-auto"
+                className="w-full max-w-3xl mx-auto opacity-90"
               />
             </div>
           </div>
@@ -206,86 +202,124 @@ const Altivum = () => {
           <img
             src={awsPartnerLogo}
             alt="AWS Partner"
-            className="w-20 h-20 object-contain"
+            className="w-20 h-20 object-contain opacity-80 hover:opacity-100 transition-opacity"
           />
         </div>
       </section>
 
+      {/* Company Structure Visualization */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-white mb-4" style={typography.sectionHeader}>
+              The Ecosystem
+            </h2>
+            <p className="text-altivum-silver max-w-2xl mx-auto" style={typography.subtitle}>
+              A unified structure designed for impact
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Connecting Lines (Desktop) */}
+            <div className="hidden md:block absolute top-12 left-1/2 -translate-x-1/2 w-3/4 h-24 border-t border-l border-r border-altivum-gold/30 rounded-t-3xl -z-10"></div>
+            <div className="hidden md:block absolute top-12 left-1/2 -translate-x-1/2 w-px h-12 bg-altivum-gold/30 -z-10"></div>
+
+            {/* HQ Node */}
+            <div className="flex justify-center mb-16 md:mb-24 relative z-10">
+              <div className="bg-altivum-dark border border-altivum-gold/50 px-8 py-6 rounded-lg text-center min-w-[200px] shadow-[0_0_30px_rgba(197,165,114,0.1)]">
+                <h3 className="text-altivum-gold font-semibold tracking-widest uppercase text-lg">Altivum HQ</h3>
+                <p className="text-altivum-silver text-sm mt-2">Strategic Core</p>
+              </div>
+            </div>
+
+            {/* Branches */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-8">
+              {/* Vanguard */}
+              <div className="flex flex-col items-center opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <div className="hidden md:block w-px h-12 bg-altivum-gold/30 mb-4"></div>
+                <div className="bg-altivum-navy/30 border border-altivum-slate/30 p-6 rounded-lg w-full max-w-sm hover:border-altivum-gold/30 transition-colors duration-300 group">
+                  <h4 className="text-white text-xl mb-3 group-hover:text-altivum-gold transition-colors">Altivum Vanguard</h4>
+                  <p className="text-altivum-silver text-sm leading-relaxed">
+                    Serving the <span className="text-white">veteran population</span>. Empowering those who served with technology and opportunity.
+                  </p>
+                </div>
+              </div>
+
+              {/* Logic */}
+              <div className="flex flex-col items-center opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <div className="hidden md:block w-px h-12 bg-altivum-gold/30 mb-4"></div>
+                <div className="bg-altivum-navy/30 border border-altivum-slate/30 p-6 rounded-lg w-full max-w-sm hover:border-altivum-gold/30 transition-colors duration-300 group">
+                  <h4 className="text-white text-xl mb-3 group-hover:text-altivum-gold transition-colors">Altivum Logic</h4>
+                  <p className="text-altivum-silver text-sm leading-relaxed">
+                    Serving <span className="text-white">small businesses</span>. Democratizing access to enterprise-grade cloud & AI solutions.
+                  </p>
+                </div>
+              </div>
+
+              {/* Press */}
+              <div className="flex flex-col items-center opacity-0 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <div className="hidden md:block w-px h-12 bg-altivum-gold/30 mb-4"></div>
+                <div className="bg-altivum-navy/30 border border-altivum-slate/30 p-6 rounded-lg w-full max-w-sm hover:border-altivum-gold/30 transition-colors duration-300 group">
+                  <h4 className="text-white text-xl mb-3 group-hover:text-altivum-gold transition-colors">Altivum Press</h4>
+                  <p className="text-altivum-silver text-sm leading-relaxed mb-4">
+                    The media arm amplifying our message.
+                  </p>
+                  <ul className="text-xs text-altivum-silver/70 space-y-1 border-t border-altivum-slate/20 pt-3">
+                    <li className="flex items-center"><span className="w-1 h-1 bg-altivum-gold rounded-full mr-2"></span>Social Media</li>
+                    <li className="flex items-center"><span className="w-1 h-1 bg-altivum-gold rounded-full mr-2"></span>Publications & Books</li>
+                    <li className="flex items-center"><span className="w-1 h-1 bg-altivum-gold rounded-full mr-2"></span>Blogs</li>
+                    <li className="flex items-center"><span className="w-1 h-1 bg-altivum-gold rounded-full mr-2"></span>The Vector Podcast</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Full Screen Image */}
-      <section className="relative h-screen overflow-hidden block">
+      <section className="relative h-[60vh] overflow-hidden block">
         <img
           src={altivumImage}
           alt="Altivum Inc. workspace"
-          className="w-full h-full object-cover block"
+          className="w-full h-full object-cover block opacity-60"
           style={{ objectPosition: 'center 90%' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-altivum-dark/80 via-altivum-dark/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-altivum-dark via-transparent to-transparent"></div>
       </section>
 
       {/* Founder Timeline */}
-      <section className="py-16 sm:py-20 md:py-24 bg-altivum-dark">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+      <section className="py-24 bg-altivum-dark">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
             <h2 className="text-white mb-4" style={typography.sectionHeader}>
               My Founder Journey
             </h2>
-            <div className="h-1 w-24 bg-altivum-gold mx-auto mb-4"></div>
-            <p className="text-altivum-silver max-w-2xl mx-auto" style={typography.subtitle}>
-              Building Altivum with purpose, vision, and a commitment to serve
+            <p className="text-altivum-silver max-w-xl mx-auto" style={typography.subtitle}>
+              Building with purpose, vision, and a commitment to serve
             </p>
           </div>
 
           {/* Timeline Items */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             {timelineItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-altivum-navy/80 backdrop-blur-sm rounded-lg border border-altivum-slate/30 overflow-hidden transition-all duration-300 hover:border-altivum-gold/50"
+                className="border-l border-altivum-slate/30 pl-8 relative group"
               >
-                {/* Timeline Card Header */}
-                <button
-                  onClick={() => toggleSection(index)}
-                  className="w-full p-6 flex items-start gap-4 text-left transition-all duration-200 hover:bg-altivum-navy/60"
-                >
-                  {/* Icon */}
-                  <div className="flex-shrink-0 w-12 h-12 bg-altivum-gold/20 rounded-lg flex items-center justify-center text-altivum-gold">
-                    {item.icon}
-                  </div>
+                <div className="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-altivum-slate/50 group-hover:bg-altivum-gold transition-colors duration-300"></div>
 
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-4">
-                      <h3 className="text-white" style={typography.cardTitleLarge}>
-                        {item.title}
-                      </h3>
-                      <svg
-                        className={`w-6 h-6 text-altivum-gold flex-shrink-0 transition-transform duration-300 ${
-                          expandedSection === index ? 'rotate-180' : ''
-                        }`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                    <p className="text-altivum-silver mt-2" style={typography.bodyText}>
-                      {item.preview}
-                    </p>
-                  </div>
-                </button>
+                <div className="mb-4">
+                  <h3 className="text-white mb-2 group-hover:text-altivum-gold transition-colors duration-300" style={typography.cardTitleLarge}>
+                    {item.title}
+                  </h3>
+                  <p className="text-altivum-silver/80 italic" style={typography.bodyText}>
+                    {item.preview}
+                  </p>
+                </div>
 
-                {/* Expandable Content */}
-                <div
-                  className={`transition-all duration-500 ease-in-out ${
-                    expandedSection === index
-                      ? 'max-h-[2000px] opacity-100'
-                      : 'max-h-0 opacity-0'
-                  } overflow-hidden`}
-                >
-                  <div className="px-6 pb-6 border-t border-altivum-slate/30 pt-6">
-                    {item.content}
-                  </div>
+                <div className="text-altivum-silver/70" style={typography.bodyText}>
+                  {item.content}
                 </div>
               </div>
             ))}
@@ -294,91 +328,57 @@ const Altivum = () => {
       </section>
 
       {/* Mission Statement */}
-      <section className="py-24 bg-altivum-dark">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-4xl">
+          <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-white mb-6" style={typography.sectionHeader}>
               Our Mission
             </h2>
-            <div className="h-1 w-16 bg-altivum-gold mb-8"></div>
-
-            <p className="text-altivum-silver mb-6" style={typography.subtitle}>
+            <p className="text-altivum-silver" style={typography.subtitle}>
               Altivum Inc. bridges the technology gap for veterans transitioning to civilian careers
-              and small businesses seeking to compete in the digital age. We believe that everyone
-              deserves access to world-class cloud infrastructure and AI capabilities.
+              and small businesses seeking to compete in the digital age.
             </p>
+          </div>
 
-            <p className="text-altivum-silver mb-12" style={typography.bodyText}>
-              Our team brings military precision and operational excellence to every engagement,
-              ensuring that technology serves as a force multiplier for growth and success.
-            </p>
-
-            <h3 className="text-white mb-6" style={typography.cardTitleLarge}>My Core Values</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex items-start text-altivum-silver">
-                <svg className="w-6 h-6 text-altivum-gold mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div>
-                  <h4 className="text-white mb-1" style={typography.cardTitleSmall}>Service Before Self</h4>
-                  <p style={typography.smallText}>Every decision prioritizes those we serve over short-term profits</p>
-                </div>
-              </div>
-              <div className="flex items-start text-altivum-silver">
-                <svg className="w-6 h-6 text-altivum-gold mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div>
-                  <h4 className="text-white mb-1" style={typography.cardTitleSmall}>Excellence in Execution</h4>
-                  <p style={typography.smallText}>Military precision applied to technology and business operations</p>
-                </div>
-              </div>
-              <div className="flex items-start text-altivum-silver">
-                <svg className="w-6 h-6 text-altivum-gold mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div>
-                  <h4 className="text-white mb-1" style={typography.cardTitleSmall}>Accessibility for All</h4>
-                  <p style={typography.smallText}>Enterprise technology shouldn't require enterprise budgets</p>
-                </div>
-              </div>
-              <div className="flex items-start text-altivum-silver">
-                <svg className="w-6 h-6 text-altivum-gold mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div>
-                  <h4 className="text-white mb-1" style={typography.cardTitleSmall}>Innovation with Purpose</h4>
-                  <p style={typography.smallText}>Technology should solve real problems, not create new ones</p>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="p-8 border border-altivum-slate/20 rounded-lg hover:border-altivum-gold/30 transition-colors duration-300">
+              <h4 className="text-white mb-3" style={typography.cardTitleSmall}>Service Before Self</h4>
+              <p className="text-altivum-silver/70" style={typography.smallText}>Every decision prioritizes those we serve over short-term profits.</p>
+            </div>
+            <div className="p-8 border border-altivum-slate/20 rounded-lg hover:border-altivum-gold/30 transition-colors duration-300">
+              <h4 className="text-white mb-3" style={typography.cardTitleSmall}>Excellence in Execution</h4>
+              <p className="text-altivum-silver/70" style={typography.smallText}>Military precision applied to technology and business operations.</p>
+            </div>
+            <div className="p-8 border border-altivum-slate/20 rounded-lg hover:border-altivum-gold/30 transition-colors duration-300">
+              <h4 className="text-white mb-3" style={typography.cardTitleSmall}>Accessibility for All</h4>
+              <p className="text-altivum-silver/70" style={typography.smallText}>Enterprise technology shouldn't require enterprise budgets.</p>
+            </div>
+            <div className="p-8 border border-altivum-slate/20 rounded-lg hover:border-altivum-gold/30 transition-colors duration-300">
+              <h4 className="text-white mb-3" style={typography.cardTitleSmall}>Innovation with Purpose</h4>
+              <p className="text-altivum-silver/70" style={typography.smallText}>Technology should solve real problems, not create new ones.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Learn More Section */}
-      <section className="py-24 bg-gradient-to-br from-altivum-navy to-altivum-blue">
+      <section className="py-24 bg-altivum-navy/10">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-white mb-6" style={typography.sectionHeader}>
             Want to Learn More?
           </h2>
-          <p className="text-altivum-silver mb-8" style={typography.subtitle}>
-            For information about Altivum's products and services, visit the company website.
-            To discuss veteran transition, technology entrepreneurship, or collaboration opportunities,
-            feel free to reach out.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12">
             <a
               href="https://altivum.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-8 py-4 bg-altivum-gold text-altivum-dark font-semibold rounded-md hover:bg-altivum-gold/90 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="inline-block px-8 py-4 bg-altivum-gold text-altivum-dark font-semibold rounded hover:bg-altivum-gold/90 transition-all duration-200"
             >
               Visit Altivum.ai
             </a>
             <Link
               to="/contact"
-              className="inline-block px-8 py-4 bg-transparent border-2 border-altivum-gold text-altivum-gold font-semibold rounded-md hover:bg-altivum-gold/10 transition-all duration-200"
+              className="inline-block px-8 py-4 bg-transparent border border-altivum-gold text-altivum-gold font-semibold rounded hover:bg-altivum-gold/10 transition-all duration-200"
             >
               Get in Touch
             </Link>
