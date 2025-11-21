@@ -191,7 +191,7 @@ const Altivum = () => {
         url="https://thechrisgrey.com/altivum"
       />
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden opacity-0 animate-fade-in">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden opacity-0 animate-fade-in">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-6 sm:mb-8">

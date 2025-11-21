@@ -12,13 +12,22 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Nav becomes solid after hero + summary sections (100vh + 500vh = 600vh)
-      const summaryEndPosition = window.innerHeight * 6;
-      setIsScrolled(window.scrollY > summaryEndPosition);
+      if (location.pathname === '/') {
+        // Nav becomes solid after hero + summary sections (100vh + 500vh = 600vh)
+        const summaryEndPosition = window.innerHeight * 6;
+        setIsScrolled(window.scrollY > summaryEndPosition);
+      } else {
+        // For other pages, solid as soon as scrolled
+        setIsScrolled(window.scrollY > 20);
+      }
     };
+
+    // Initial check
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -76,8 +85,8 @@ const Navigation = () => {
             <Link
               to="/"
               className={`px-4 py-2 rounded-md text-sm font-medium tracking-wide transition-all duration-200 ${isActive('/')
-                  ? 'text-altivum-gold bg-altivum-blue/30'
-                  : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
+                ? 'text-altivum-gold bg-altivum-blue/30'
+                : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
                 }`}
             >
               Home
@@ -88,8 +97,8 @@ const Navigation = () => {
               <button
                 onClick={() => setIsAboutDropdownOpen(!isAboutDropdownOpen)}
                 className={`px-4 py-2 rounded-md text-sm font-medium tracking-wide transition-all duration-200 flex items-center ${isAboutActive()
-                    ? 'text-altivum-gold bg-altivum-blue/30'
-                    : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
+                  ? 'text-altivum-gold bg-altivum-blue/30'
+                  : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
                   }`}
               >
                 About
@@ -107,8 +116,8 @@ const Navigation = () => {
                         to={item.path}
                         onClick={() => setIsAboutDropdownOpen(false)}
                         className={`block px-4 py-3 text-sm font-medium transition-all duration-200 ${isActive(item.path)
-                            ? 'text-altivum-gold bg-altivum-blue/30'
-                            : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
+                          ? 'text-altivum-gold bg-altivum-blue/30'
+                          : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
                           }`}
                       >
                         {item.label}
@@ -131,8 +140,8 @@ const Navigation = () => {
                 key={item.path}
                 to={item.path}
                 className={`px-4 py-2 rounded-md text-sm font-medium tracking-wide transition-all duration-200 ${isActive(item.path)
-                    ? 'text-altivum-gold bg-altivum-blue/30'
-                    : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
+                  ? 'text-altivum-gold bg-altivum-blue/30'
+                  : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
                   }`}
               >
                 {item.label}
@@ -159,8 +168,8 @@ const Navigation = () => {
                 to="/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive('/')
-                    ? 'text-altivum-gold bg-altivum-blue/30'
-                    : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
+                  ? 'text-altivum-gold bg-altivum-blue/30'
+                  : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
                   }`}
               >
                 Home
@@ -177,8 +186,8 @@ const Navigation = () => {
                         to={item.path}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${isActive(item.path)
-                            ? 'text-altivum-gold bg-altivum-blue/30'
-                            : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
+                          ? 'text-altivum-gold bg-altivum-blue/30'
+                          : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
                           }`}
                       >
                         {item.label}
@@ -201,8 +210,8 @@ const Navigation = () => {
                   to={item.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`px-4 py-3 rounded-md text-base font-medium transition-all duration-200 ${isActive(item.path)
-                      ? 'text-altivum-gold bg-altivum-blue/30'
-                      : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
+                    ? 'text-altivum-gold bg-altivum-blue/30'
+                    : 'text-altivum-silver hover:text-white hover:bg-altivum-blue/20'
                     }`}
                 >
                   {item.label}
