@@ -1,11 +1,8 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { SEO } from '../components/SEO';
 import { typography } from '../utils/typography';
 import vetImage from '../assets/vet.jpeg';
 import ktocImage from '../assets/ktoc.jpeg';
-// import cloudArchImage from '../assets/cloud-arch.jpg'; // Removed unused import
-// If cloud-arch.jpg doesn't exist, I'll use a placeholder or keep the existing one if it was there.
-// Checking previous file content, it used placeholders. I will use vetImage for the new one.
 
 interface BlogPost {
   id: number;
@@ -20,6 +17,62 @@ interface BlogPost {
 
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [subscribeEmail, setSubscribeEmail] = useState('');
+  const [subscribeStatus, setSubscribeStatus] = useState<{
+    type: 'idle' | 'loading' | 'success' | 'error';
+    message: string;
+  }>({ type: 'idle', message: '' });
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const handleSubscribe = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!emailRegex.test(subscribeEmail.trim())) {
+      setSubscribeStatus({ type: 'error', message: 'Please enter a valid email address' });
+      return;
+    }
+
+    setSubscribeStatus({ type: 'loading', message: 'Subscribing...' });
+
+    try {
+      const response = await fetch('https://sf5bejshafrb6t7zbbfw5knu7a0axlyp.lambda-url.us-east-2.on.aws/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: subscribeEmail.trim()
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubscribeStatus({
+          type: 'success',
+          message: result.message || 'Successfully subscribed! Check your email for confirmation.'
+        });
+        setSubscribeEmail('');
+      } else if (response.status === 429) {
+        setSubscribeStatus({
+          type: 'error',
+          message: 'Too many subscription attempts. Please try again later.'
+        });
+      } else {
+        setSubscribeStatus({
+          type: 'error',
+          message: result.error || 'Failed to subscribe. Please try again.'
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubscribeStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.'
+      });
+    }
+  };
 
   const blogPosts: BlogPost[] = [
     {
@@ -230,7 +283,6 @@ const Blog = () => {
       </section>
 
       {/* Newsletter Section */}
-      {/* Newsletter Section */}
       <section className="py-24 bg-altivum-dark border-t border-white/5">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-white mb-6" style={typography.sectionHeader}>
@@ -240,19 +292,50 @@ const Blog = () => {
             Subscribe to receive new articles directly to your inbox. No spam, just valuable
             insights on leadership, technology, and growth.
           </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+          <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto" onSubmit={handleSubscribe}>
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-6 py-4 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/50 focus:outline-none focus:border-altivum-gold transition-colors rounded-none"
+              value={subscribeEmail}
+              onChange={(e) => {
+                setSubscribeEmail(e.target.value);
+                if (subscribeStatus.type === 'error') {
+                  setSubscribeStatus({ type: 'idle', message: '' });
+                }
+              }}
+              required
+              disabled={subscribeStatus.type === 'loading'}
+              className="flex-1 px-6 py-4 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/50 focus:outline-none focus:border-altivum-gold transition-colors rounded-none disabled:opacity-50"
             />
             <button
               type="submit"
-              className="px-8 py-4 bg-white text-altivum-dark font-medium hover:bg-altivum-gold transition-colors duration-200"
+              disabled={subscribeStatus.type === 'loading'}
+              className={`px-8 py-4 font-medium transition-colors duration-200 ${
+                subscribeStatus.type === 'loading'
+                  ? 'bg-altivum-silver text-altivum-dark cursor-not-allowed'
+                  : 'bg-white text-altivum-dark hover:bg-altivum-gold'
+              }`}
             >
-              Subscribe
+              {subscribeStatus.type === 'loading' ? 'Subscribing...' : 'Subscribe'}
             </button>
           </form>
+
+          {/* Status Message */}
+          {subscribeStatus.message && (
+            <div
+              className={`mt-6 p-4 rounded max-w-xl mx-auto ${
+                subscribeStatus.type === 'success'
+                  ? 'bg-green-900/20 border border-green-500/50 text-green-400'
+                  : subscribeStatus.type === 'error'
+                  ? 'bg-red-900/20 border border-red-500/50 text-red-400'
+                  : 'bg-altivum-blue/20 border border-altivum-gold/50 text-altivum-gold'
+              }`}
+              role="alert"
+            >
+              {subscribeStatus.message}
+            </div>
+          )}
+
           <p className="text-xs text-altivum-silver/40 mt-6">
             We respect your privacy. Unsubscribe at any time.
           </p>

@@ -25,8 +25,8 @@ npm run lint         # Run ESLint on TypeScript files
 
 ### Routing & Layout
 - React Router v6 with client-side routing
-- Global layout in `App.tsx`: `<Navigation>` → `<Routes>` → `<Footer>`
-- 7 main routes: `/` (Home), `/about`, `/altivum`, `/podcast`, `/blog`, `/links`, `/contact`
+- Global layout in `App.tsx`: `<ScrollToTop>` → `<Navigation>` → `<Routes>` → `<Footer>`
+- 8 main routes: `/` (Home), `/about`, `/altivum`, `/podcast`, `/beyond-the-assessment`, `/blog`, `/links`, `/contact`
 
 ### Design System (Tailwind)
 
@@ -38,15 +38,24 @@ npm run lint         # Run ESLint on TypeScript files
 - `altivum-silver`: #9BA6B8 (body text)
 - `altivum-gold`: #C5A572 (highlights, CTAs)
 
-**Typography:**
-- `font-sans`: Inter (body text)
-- `font-serif`: Playfair Display (headings)
-- `font-display`: Montserrat (logo, display text)
-- Google Fonts + Material Icons loaded via CDN in `index.html`
+**Typography System:**
+- All fonts use SF Pro Display (Apple's system font) with fallbacks to Helvetica Neue, Segoe UI
+- Centralized typography utilities in `src/utils/typography.ts`
+- Consistent ultra-light weight (200) across all text
+- Fluid sizing using `clamp()` for responsive design
+- 7 predefined text styles: `heroHeader`, `sectionHeader`, `cardTitleLarge`, `cardTitleSmall`, `subtitle`, `bodyText`, `smallText`
+- Usage: Import `typography` and apply styles inline: `<h1 style={typography.heroHeader}>Title</h1>`
+- NEVER use Google Fonts (Inter, Playfair, Montserrat) - those were removed in favor of SF Pro Display
+
+**Icons:**
+- Google Material Icons loaded via CDN in `index.html`
+- Usage: `<span className="material-icons">icon_name</span>`
+- Brand logos (social media) use inline SVG paths
 
 **Custom Animations:**
-- `animate-fade-in`: Hero section entrance (1.2s delay)
-- `animate-nav-fade-in`: Navigation delayed entrance (0.8s with 1s delay)
+- `animate-fade-in`: Hero section entrance (1.2s)
+- `animate-nav-fade-in`: Navigation delayed entrance (0.8s with 2s delay)
+- `shimmer`: Background shimmer effect
 - Defined as Tailwind keyframes in `tailwind.config.js`
 
 ### Home Page Scroll Experience
@@ -55,31 +64,72 @@ The Home page (`src/pages/Home.tsx`) features a sophisticated scroll-based anima
 
 **Structure:**
 1. **Hero Section (100vh)**: Static hero image with fade-in animation
-2. **Summary Section (300vh)**: Sticky profile image with scroll-triggered key points
-3. **Remaining Sections**: Standard content (Key Pillars, Featured Book, CTA)
+2. **Summary Section (450vh mobile / 500vh desktop)**: Sticky profile image with scroll-triggered key points
+3. **CTA Section**: Standard content with social links
 
 **Summary Section Mechanics:**
-- Profile image is `position: sticky` inside a `300vh` tall container
-- 4 key points fade in from left as user scrolls, appearing at 50vh intervals:
-  - 0vh: "Founder & CEO | Altivum Inc"
-  - 50vh: "Host | The Vector Podcast"
-  - 100vh: "Author | Beyond the Assessment"
-  - 150vh: "Former Green Beret | 18D"
-- After 150vh, all points remain visible for final 150vh of scroll
-- Scroll progress tracked via `useState` + `useEffect` scroll listener
+- Profile image is `position: sticky` inside a tall container (450vh mobile, 500vh desktop)
+- 4 key points fade in from left as user scrolls:
+  - Mobile: appear every 50vh
+  - Desktop: appear every 80vh
+  - Points: Personal Biography, Altivum Inc, The Vector Podcast, Beyond the Assessment
+- Scroll progress tracked via `useState` + `useEffect` with throttled scroll listener using `requestAnimationFrame`
 - Key points styled as left-aligned tabs with `border-l-4 border-altivum-gold`
+- Uses `will-change: opacity, transform` for performance optimization
 
 **Navigation Transparency:**
-- Nav bar stays transparent through hero + summary sections (400vh total)
+- Nav bar stays transparent through hero + summary sections (600vh total on home page)
 - Becomes solid (`bg-altivum-navy/95 backdrop-blur-md`) after scrolling past summary
-- Threshold: `window.innerHeight * 4` in `Navigation.tsx`
+- Threshold: `window.innerHeight * 6` in `Navigation.tsx`
+- On other pages, nav becomes solid after 20px scroll
+
+### Navigation Structure
+
+The Navigation component (`src/components/Navigation.tsx`) features a dropdown system:
+
+**Desktop Navigation:**
+- "About" is a dropdown button with 4 sub-items:
+  - Personal Biography (`/about`)
+  - Altivum Inc (`/altivum`)
+  - The Vector Podcast (`/podcast`)
+  - Beyond the Assessment (`/beyond-the-assessment`)
+- Dropdown closes when clicking outside (using `useRef` and `mousedown` event listener)
+- Other nav items: Home, Blog, Links, Contact
+
+**Mobile Navigation:**
+- Hamburger menu toggle (visible on `md:hidden`)
+- "About" section expanded inline with all sub-items
+- Menu has solid background (`bg-altivum-navy/95 backdrop-blur-md`) for readability
+
+### SEO & Metadata
+
+**SEO Component** (`src/components/SEO.tsx`):
+- Uses `react-helmet-async` for dynamic meta tags
+- Automatically appends "| Christian Perez" to page titles
+- Default OG image: `https://thechrisgrey.com/og.png`
+- Includes JSON-LD structured data with `@graph` for AI discovery:
+  - Person schema for Christian Perez
+  - Organization schema for Altivum Inc.
+  - WebSite schema for the site itself
+- Custom structured data can be merged via `structuredData` prop
+- All pages should use this component for consistent SEO
+
+**Usage:**
+```tsx
+<SEO
+  title="Page Title"
+  description="Page description"
+  keywords="optional, keywords"
+  structuredData={[...]} // optional additional schemas
+/>
+```
 
 ### Component Patterns
 
-**Icons:**
-- Use Google Material Icons via `<span className="material-icons">icon_name</span>`
-- Brand logos (social media) use inline SVG paths
-- NO custom icon components or libraries
+**Responsive Design:**
+- Mobile-first approach with Tailwind breakpoints (`sm:`, `md:`, `lg:`)
+- Touch-optimized with `touch-manipulation` class on interactive elements
+- Mobile-specific considerations: larger tap targets (min-h-[48px]), adjusted spacing
 
 **Images:**
 - Assets stored in `src/assets/`
@@ -87,18 +137,15 @@ The Home page (`src/pages/Home.tsx`) features a sophisticated scroll-based anima
 - Large images: profile photos, hero banners, featured content
 - Small images: QR codes, logos
 
-**Responsive Design:**
-- Mobile-first approach with Tailwind breakpoints (`md:`, `lg:`)
-- Mobile menu toggle in `Navigation.tsx` (hamburger icon shows/hides on `md:hidden`)
-- Grid layouts: single column mobile → multi-column desktop
-
 ## Key Files
 
 - `tailwind.config.js`: Custom colors, fonts, animations
-- `src/components/Navigation.tsx`: Fixed nav with scroll-based transparency
+- `src/utils/typography.ts`: Centralized typography system
+- `src/components/Navigation.tsx`: Fixed nav with scroll-based transparency and dropdown menu
+- `src/components/SEO.tsx`: SEO/metadata management with structured data
 - `src/pages/Home.tsx`: Complex scroll animations and sticky sections
 - `amplify.yml`: AWS Amplify build configuration
-- `index.html`: Font/icon CDN links, favicon reference
+- `index.html`: Material Icons CDN link, favicon, base meta tags
 
 ## Deployment Notes
 
@@ -106,3 +153,4 @@ The Home page (`src/pages/Home.tsx`) features a sophisticated scroll-based anima
 - Assets in `public/` are copied to dist root (e.g., `public/tcg.png` → `/tcg.png`)
 - Vite bundles `src/assets/` imports with cache-busting hashes
 - Build must succeed (`npm run build`) before deploying
+- Site is hosted at `https://thechrisgrey.com`

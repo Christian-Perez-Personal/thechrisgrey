@@ -1,7 +1,100 @@
 import { SEO } from '../components/SEO';
 import { typography } from '../utils/typography';
+import { useState, FormEvent } from 'react';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+    website: '' // honeypot field
+  });
+  const [formStatus, setFormStatus] = useState<{
+    type: 'idle' | 'loading' | 'success' | 'error';
+    message: string;
+  }>({ type: 'idle', message: '' });
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const validateForm = (): string | null => {
+    if (formData.name.trim().length < 2 || formData.name.trim().length > 100) {
+      return 'Name must be between 2 and 100 characters';
+    }
+    if (!emailRegex.test(formData.email.trim())) {
+      return 'Please enter a valid email address';
+    }
+    if (formData.message.trim().length < 10 || formData.message.trim().length > 5000) {
+      return 'Message must be between 10 and 5000 characters';
+    }
+    return null;
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    // Client-side validation
+    const validationError = validateForm();
+    if (validationError) {
+      setFormStatus({ type: 'error', message: validationError });
+      return;
+    }
+
+    setFormStatus({ type: 'loading', message: 'Sending...' });
+
+    try {
+      const response = await fetch('https://vrs4egsi745nep54y6abvwlcwq0smqak.lambda-url.us-east-2.on.aws/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: `Subject: ${formData.subject.trim() || 'No subject'}\n\n${formData.message.trim()}`,
+          website: formData.website // honeypot
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setFormStatus({
+          type: 'success',
+          message: 'Message sent successfully! I\'ll get back to you soon.'
+        });
+        setFormData({ name: '', email: '', subject: '', message: '', website: '' });
+      } else if (response.status === 429) {
+        setFormStatus({
+          type: 'error',
+          message: 'Too many requests. Please try again in a few minutes.'
+        });
+      } else {
+        setFormStatus({
+          type: 'error',
+          message: result.error || 'Failed to send message. Please try again.'
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setFormStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.'
+      });
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+    // Clear error when user starts typing
+    if (formStatus.type === 'error') {
+      setFormStatus({ type: 'idle', message: '' });
+    }
+  };
+
   return (
     <div className="min-h-screen pt-20">
       <SEO
@@ -38,15 +131,20 @@ const Contact = () => {
               <h2 className="text-white mb-8" style={typography.sectionHeader}>
                 Send a Message
               </h2>
-              <form className="space-y-8">
+              <form className="space-y-8" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-altivum-silver mb-2 uppercase tracking-wider">
-                    Name
+                    Name *
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    minLength={2}
+                    maxLength={100}
                     className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors rounded-none"
                     placeholder="Your name"
                   />
@@ -54,12 +152,16 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-altivum-silver mb-2 uppercase tracking-wider">
-                    Email
+                    Email *
                   </label>
                   <input
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    maxLength={255}
                     className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors rounded-none"
                     placeholder="your@email.com"
                   />
@@ -73,6 +175,9 @@ const Contact = () => {
                     type="text"
                     id="subject"
                     name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    maxLength={200}
                     className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors rounded-none"
                     placeholder="What's this about?"
                   />
@@ -80,22 +185,62 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-altivum-silver mb-2 uppercase tracking-wider">
-                    Message
+                    Message *
                   </label>
                   <textarea
                     id="message"
                     name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    minLength={10}
+                    maxLength={5000}
                     rows={6}
                     className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors resize-none rounded-none"
                     placeholder="Tell me what you're thinking..."
                   ></textarea>
                 </div>
 
+                {/* Honeypot field - hidden from users */}
+                <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+                  <label htmlFor="website">Website (leave blank)</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                {/* Status Message */}
+                {formStatus.message && (
+                  <div
+                    className={`p-4 rounded ${
+                      formStatus.type === 'success'
+                        ? 'bg-green-900/20 border border-green-500/50 text-green-400'
+                        : formStatus.type === 'error'
+                        ? 'bg-red-900/20 border border-red-500/50 text-red-400'
+                        : 'bg-altivum-blue/20 border border-altivum-gold/50 text-altivum-gold'
+                    }`}
+                    role="alert"
+                  >
+                    {formStatus.message}
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="px-10 py-4 bg-white text-altivum-dark font-medium hover:bg-altivum-gold transition-colors duration-200"
+                  disabled={formStatus.type === 'loading'}
+                  className={`px-10 py-4 font-medium transition-colors duration-200 ${
+                    formStatus.type === 'loading'
+                      ? 'bg-altivum-silver text-altivum-dark cursor-not-allowed'
+                      : 'bg-white text-altivum-dark hover:bg-altivum-gold'
+                  }`}
                 >
-                  Send Message
+                  {formStatus.type === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
