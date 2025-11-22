@@ -131,9 +131,9 @@ const Contact = () => {
               <h2 className="text-white mb-8" style={typography.sectionHeader}>
                 Send a Message
               </h2>
-              <form className="space-y-8" onSubmit={handleSubmit}>
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-altivum-silver mb-2 uppercase tracking-wider">
+              <form className="space-y-10" onSubmit={handleSubmit}>
+                <div className="group">
+                  <label htmlFor="name" className="block text-xs font-medium text-altivum-gold mb-3 uppercase tracking-widest">
                     Name *
                   </label>
                   <input
@@ -145,13 +145,13 @@ const Contact = () => {
                     required
                     minLength={2}
                     maxLength={100}
-                    className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors rounded-none"
+                    className="w-full px-0 py-4 bg-transparent border-b-2 border-white/10 text-white placeholder-altivum-silver/40 focus:outline-none focus:border-altivum-gold transition-all duration-300 rounded-none"
                     placeholder="Your name"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-altivum-silver mb-2 uppercase tracking-wider">
+                <div className="group">
+                  <label htmlFor="email" className="block text-xs font-medium text-altivum-gold mb-3 uppercase tracking-widest">
                     Email *
                   </label>
                   <input
@@ -162,13 +162,13 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     maxLength={255}
-                    className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors rounded-none"
+                    className="w-full px-0 py-4 bg-transparent border-b-2 border-white/10 text-white placeholder-altivum-silver/40 focus:outline-none focus:border-altivum-gold transition-all duration-300 rounded-none"
                     placeholder="your@email.com"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-altivum-silver mb-2 uppercase tracking-wider">
+                <div className="group">
+                  <label htmlFor="subject" className="block text-xs font-medium text-altivum-silver mb-3 uppercase tracking-widest">
                     Subject
                   </label>
                   <input
@@ -178,13 +178,13 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     maxLength={200}
-                    className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors rounded-none"
+                    className="w-full px-0 py-4 bg-transparent border-b-2 border-white/10 text-white placeholder-altivum-silver/40 focus:outline-none focus:border-altivum-gold transition-all duration-300 rounded-none"
                     placeholder="What's this about?"
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-altivum-silver mb-2 uppercase tracking-wider">
+                <div className="group">
+                  <label htmlFor="message" className="block text-xs font-medium text-altivum-gold mb-3 uppercase tracking-widest">
                     Message *
                   </label>
                   <textarea
@@ -196,7 +196,7 @@ const Contact = () => {
                     minLength={10}
                     maxLength={5000}
                     rows={6}
-                    className="w-full px-0 py-3 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/30 focus:outline-none focus:border-altivum-gold transition-colors resize-none rounded-none"
+                    className="w-full px-0 py-4 bg-transparent border-b-2 border-white/10 text-white placeholder-altivum-silver/40 focus:outline-none focus:border-altivum-gold transition-all duration-300 resize-none rounded-none"
                     placeholder="Tell me what you're thinking..."
                   ></textarea>
                 </div>
@@ -218,12 +218,12 @@ const Contact = () => {
                 {/* Status Message */}
                 {formStatus.message && (
                   <div
-                    className={`p-4 rounded ${
+                    className={`p-5 rounded-sm backdrop-blur-sm transition-all duration-300 ${
                       formStatus.type === 'success'
-                        ? 'bg-green-900/20 border border-green-500/50 text-green-400'
+                        ? 'bg-green-900/30 border-l-4 border-green-500 text-green-300'
                         : formStatus.type === 'error'
-                        ? 'bg-red-900/20 border border-red-500/50 text-red-400'
-                        : 'bg-altivum-blue/20 border border-altivum-gold/50 text-altivum-gold'
+                        ? 'bg-red-900/30 border-l-4 border-red-500 text-red-300'
+                        : 'bg-altivum-blue/30 border-l-4 border-altivum-gold text-altivum-gold'
                     }`}
                     role="alert"
                   >
@@ -234,13 +234,18 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={formStatus.type === 'loading'}
-                  className={`px-10 py-4 font-medium transition-colors duration-200 ${
+                  className={`group relative px-12 py-5 font-medium uppercase tracking-wider text-sm overflow-hidden transition-all duration-300 ${
                     formStatus.type === 'loading'
-                      ? 'bg-altivum-silver text-altivum-dark cursor-not-allowed'
-                      : 'bg-white text-altivum-dark hover:bg-altivum-gold'
+                      ? 'bg-altivum-slate/50 text-altivum-silver cursor-not-allowed'
+                      : 'bg-altivum-gold text-altivum-dark hover:bg-white hover:shadow-[0_0_30px_rgba(197,165,114,0.3)]'
                   }`}
                 >
-                  {formStatus.type === 'loading' ? 'Sending...' : 'Send Message'}
+                  <span className="relative z-10">
+                    {formStatus.type === 'loading' ? 'Sending...' : 'Send Message'}
+                  </span>
+                  {formStatus.type !== 'loading' && (
+                    <span className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                  )}
                 </button>
               </form>
             </div>

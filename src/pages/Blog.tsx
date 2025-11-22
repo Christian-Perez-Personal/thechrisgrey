@@ -283,52 +283,65 @@ const Blog = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-24 bg-altivum-dark border-t border-white/5">
+      <section className="py-32 bg-gradient-to-b from-altivum-dark via-altivum-navy to-altivum-dark border-t border-white/5">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-white mb-6" style={typography.sectionHeader}>
-            Stay Informed
-          </h2>
-          <p className="text-altivum-silver mb-10" style={typography.bodyText}>
-            Subscribe to receive new articles directly to your inbox. No spam, just valuable
-            insights on leadership, technology, and growth.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto" onSubmit={handleSubscribe}>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={subscribeEmail}
-              onChange={(e) => {
-                setSubscribeEmail(e.target.value);
-                if (subscribeStatus.type === 'error') {
-                  setSubscribeStatus({ type: 'idle', message: '' });
-                }
-              }}
-              required
-              disabled={subscribeStatus.type === 'loading'}
-              className="flex-1 px-6 py-4 bg-transparent border-b border-white/20 text-white placeholder-altivum-silver/50 focus:outline-none focus:border-altivum-gold transition-colors rounded-none disabled:opacity-50"
-            />
+          <div className="mb-8">
+            <div className="inline-block px-4 py-1 bg-altivum-gold/10 border border-altivum-gold/20 rounded-full mb-6">
+              <span className="text-altivum-gold text-xs uppercase tracking-widest font-medium">Newsletter</span>
+            </div>
+            <h2 className="text-white mb-6" style={typography.sectionHeader}>
+              Stay Informed
+            </h2>
+            <p className="text-altivum-silver mb-12 max-w-2xl mx-auto" style={typography.bodyText}>
+              Subscribe to receive new articles directly to your inbox. No spam, just valuable
+              insights on leadership, technology, and growth.
+            </p>
+          </div>
+
+          <form className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto mb-8" onSubmit={handleSubscribe}>
+            <div className="flex-1 relative group">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={subscribeEmail}
+                onChange={(e) => {
+                  setSubscribeEmail(e.target.value);
+                  if (subscribeStatus.type === 'error') {
+                    setSubscribeStatus({ type: 'idle', message: '' });
+                  }
+                }}
+                required
+                disabled={subscribeStatus.type === 'loading'}
+                className="w-full px-6 py-5 bg-white/5 border-2 border-white/10 text-white placeholder-altivum-silver/50 focus:outline-none focus:border-altivum-gold focus:bg-white/10 transition-all duration-300 rounded-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+            </div>
             <button
               type="submit"
               disabled={subscribeStatus.type === 'loading'}
-              className={`px-8 py-4 font-medium transition-colors duration-200 ${
+              className={`group relative px-10 py-5 font-medium uppercase tracking-wider text-sm overflow-hidden transition-all duration-300 whitespace-nowrap ${
                 subscribeStatus.type === 'loading'
-                  ? 'bg-altivum-silver text-altivum-dark cursor-not-allowed'
-                  : 'bg-white text-altivum-dark hover:bg-altivum-gold'
+                  ? 'bg-altivum-slate/50 text-altivum-silver cursor-not-allowed'
+                  : 'bg-altivum-gold text-altivum-dark hover:bg-white hover:shadow-[0_0_30px_rgba(197,165,114,0.3)]'
               }`}
             >
-              {subscribeStatus.type === 'loading' ? 'Subscribing...' : 'Subscribe'}
+              <span className="relative z-10">
+                {subscribeStatus.type === 'loading' ? 'Subscribing...' : 'Subscribe'}
+              </span>
+              {subscribeStatus.type !== 'loading' && (
+                <span className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+              )}
             </button>
           </form>
 
           {/* Status Message */}
           {subscribeStatus.message && (
             <div
-              className={`mt-6 p-4 rounded max-w-xl mx-auto ${
+              className={`mt-8 p-5 rounded-sm backdrop-blur-sm max-w-2xl mx-auto transition-all duration-300 ${
                 subscribeStatus.type === 'success'
-                  ? 'bg-green-900/20 border border-green-500/50 text-green-400'
+                  ? 'bg-green-900/30 border-l-4 border-green-500 text-green-300'
                   : subscribeStatus.type === 'error'
-                  ? 'bg-red-900/20 border border-red-500/50 text-red-400'
-                  : 'bg-altivum-blue/20 border border-altivum-gold/50 text-altivum-gold'
+                  ? 'bg-red-900/30 border-l-4 border-red-500 text-red-300'
+                  : 'bg-altivum-blue/30 border-l-4 border-altivum-gold text-altivum-gold'
               }`}
               role="alert"
             >
@@ -336,7 +349,7 @@ const Blog = () => {
             </div>
           )}
 
-          <p className="text-xs text-altivum-silver/40 mt-6">
+          <p className="text-xs text-altivum-silver/50 mt-8 uppercase tracking-wider">
             We respect your privacy. Unsubscribe at any time.
           </p>
         </div>
