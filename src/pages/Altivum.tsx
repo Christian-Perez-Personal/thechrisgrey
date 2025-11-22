@@ -252,7 +252,7 @@ const Altivum = () => {
                   <ul className="text-xs text-altivum-silver/70 space-y-1 border-t border-altivum-slate/20 pt-3">
                     <li className="flex items-center">
                       <span className="w-1 h-1 bg-altivum-gold rounded-full mr-2"></span>
-                      <a href="https://vetroi.altivum.ai" target="_blank" rel="noopener noreferrer" className="hover:text-altivum-gold transition-colors">VetROI</a>
+                      <a href="https://vetroi.altivum.ai" target="_blank" rel="noopener noreferrer" className="hover:text-altivum-gold transition-colors">VetROI™</a>
                     </li>
                     <li className="flex items-center"><span className="w-1 h-1 bg-altivum-gold rounded-full mr-2"></span>NextMission.ai on Amazon PartyRock</li>
                   </ul>
