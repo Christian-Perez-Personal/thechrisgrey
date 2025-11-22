@@ -91,7 +91,7 @@ const Altivum = () => {
       content: (
         <div className="space-y-4">
           <p className="text-altivum-silver" style={typography.bodyText}>
-            In five years, I envision Altivum as the go-to platform for veteran entrepreneurs and small businesses seeking to compete in the AI era. Not the biggest company, but the most impactful. Measured in lives changed, businesses saved, and communities strengthened.
+            The goal is to be the hub of Cloud and AI architecture, inference, and data in Clarksville and the surrounding areas. We're building the technical infrastructure and talent pipeline that positions this region as a center of excellence for intelligent systems and cloud-native solutions.
           </p>
           <h4 className="text-white mt-6" style={typography.cardTitleSmall}>Operational Excellence Criteria</h4>
           <ul className="space-y-3">
