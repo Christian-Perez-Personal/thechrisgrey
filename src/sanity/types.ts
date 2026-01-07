@@ -1,0 +1,85 @@
+// TypeScript types for Sanity content
+
+export interface SanityImage {
+  asset: {
+    _id: string
+    url: string
+  }
+  alt?: string
+  caption?: string
+}
+
+export interface SanityTag {
+  _id: string
+  title: string
+  slug: { current: string }
+}
+
+export interface SanitySeries {
+  _id: string
+  title: string
+  slug: { current: string }
+  description?: string
+}
+
+export interface SanityPost {
+  _id: string
+  title: string
+  slug: { current: string }
+  excerpt: string
+  category: string
+  publishedAt: string
+  readingTime?: number
+  isFeatured?: boolean
+  pdfUrl?: string
+  seoTitle?: string
+  seoDescription?: string
+  image?: SanityImage
+  body?: SanityBlock[]
+  tags?: SanityTag[]
+  series?: SanitySeries
+  seriesOrder?: number
+  relatedPosts?: SanityPostPreview[]
+}
+
+export interface SanityPostPreview {
+  _id: string
+  title: string
+  slug: { current: string }
+  excerpt: string
+  category: string
+  publishedAt: string
+  readingTime?: number
+  isFeatured?: boolean
+  image?: SanityImage
+  tags?: SanityTag[]
+}
+
+// Portable Text block types
+export interface SanityBlock {
+  _type: string
+  _key: string
+  [key: string]: unknown
+}
+
+export interface CodeBlock {
+  _type: 'codeBlock'
+  _key: string
+  language?: string
+  filename?: string
+  code: string
+}
+
+export interface Callout {
+  _type: 'callout'
+  _key: string
+  type: 'note' | 'tip' | 'warning' | 'important'
+  text: string
+}
+
+export interface YouTube {
+  _type: 'youtube'
+  _key: string
+  url: string
+  caption?: string
+}
