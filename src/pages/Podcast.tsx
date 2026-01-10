@@ -55,7 +55,7 @@ const Podcast = () => {
               </div>
               <div className="text-center">
                 <div className="text-4xl font-light text-altivum-gold" style={{ fontWeight: 200 }}>
-                  2024
+                  2025
                 </div>
                 <div className="text-sm text-altivum-silver uppercase tracking-wider mt-1">
                   Launched
