@@ -334,7 +334,7 @@ const Blog = () => {
                       <div className="absolute inset-0 bg-altivum-navy/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
                       {post.image?.asset ? (
                         <img
-                          src={urlFor(post.image).width(600).height(340).url()}
+                          src={urlFor(post.image).width(600).height(340).auto('format').quality(80).url()}
                           alt={post.image.alt || post.title}
                           loading="lazy"
                           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"

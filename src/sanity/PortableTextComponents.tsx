@@ -45,7 +45,7 @@ export const portableTextComponents: PortableTextComponents = {
       return (
         <figure className="my-8">
           <img
-            src={urlFor(value).width(800).url()}
+            src={urlFor(value).width(800).auto('format').quality(80).url()}
             alt={value.alt || ''}
             className="w-full rounded-lg"
           />

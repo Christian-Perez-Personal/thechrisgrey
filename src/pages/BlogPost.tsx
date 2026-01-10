@@ -125,7 +125,7 @@ const BlogPost = () => {
       <SEO
         title={post.seoTitle || post.title}
         description={post.seoDescription || post.excerpt}
-        image={post.image?.asset ? urlFor(post.image).width(1200).height(630).url() : undefined}
+        image={post.image?.asset ? urlFor(post.image).width(1200).height(630).auto('format').quality(85).url() : undefined}
         url={shareUrl}
         type="article"
         breadcrumbs={[
@@ -147,7 +147,7 @@ const BlogPost = () => {
             "publisher": {
               "@id": "https://altivum.ai/#organization"
             },
-            "image": post.image?.asset ? urlFor(post.image).width(1200).url() : "https://thechrisgrey.com/og.png",
+            "image": post.image?.asset ? urlFor(post.image).width(1200).auto('format').quality(85).url() : "https://thechrisgrey.com/og.png",
             "articleSection": post.category,
             "keywords": post.tags?.map(t => t.title).join(', ') || '',
             "mainEntityOfPage": {
@@ -165,7 +165,7 @@ const BlogPost = () => {
         {post.image?.asset && (
           <div className="absolute inset-0 h-[50vh] overflow-hidden">
             <img
-              src={urlFor(post.image).width(1920).height(600).url()}
+              src={urlFor(post.image).width(1920).height(600).auto('format').quality(85).url()}
               alt={post.image.alt || post.title}
               className="w-full h-full object-cover opacity-30"
             />
@@ -344,7 +344,7 @@ const BlogPost = () => {
                     <div className="absolute inset-0 bg-altivum-navy/20 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
                     {relatedPost.image?.asset ? (
                       <img
-                        src={urlFor(relatedPost.image).width(400).height(225).url()}
+                        src={urlFor(relatedPost.image).width(400).height(225).auto('format').quality(75).url()}
                         alt={relatedPost.image.alt || relatedPost.title}
                         loading="lazy"
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
