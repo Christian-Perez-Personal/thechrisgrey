@@ -168,6 +168,12 @@ export const buildOrganizationSchema = () => ({
         "Web Development",
         "SEO & AEO"
     ],
+    "award": {
+        "@type": "Award",
+        "name": "Veteran Business of the Month",
+        "description": "Recognized by Clarksville Area Chamber of Commerce, December 2025",
+        "url": "https://www.clarksvilleonline.com/2025/12/12/clarksville-area-chamber-of-commerces-veteran-business-of-the-month-altivum-inc/"
+    },
     "sameAs": [
         "https://www.linkedin.com/company/altivum-inc",
         "https://github.com/AltivumInc-Admin",

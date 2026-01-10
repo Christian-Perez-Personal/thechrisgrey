@@ -185,6 +185,12 @@ const Altivum = () => {
               "contactType": "customer service"
             },
             "knowsAbout": ["Cloud Architecture", "AI Integration", "Veteran Services", "Web Development"],
+            "award": {
+              "@type": "Award",
+              "name": "Veteran Business of the Month",
+              "description": "Recognized by Clarksville Area Chamber of Commerce, December 2025",
+              "url": "https://www.clarksvilleonline.com/2025/12/12/clarksville-area-chamber-of-commerces-veteran-business-of-the-month-altivum-inc/"
+            },
             "sameAs": [
               "https://www.linkedin.com/company/altivum-inc",
               "https://github.com/AltivumInc-Admin",
@@ -210,13 +216,22 @@ const Altivum = () => {
           </div>
         </div>
 
-        {/* AWS Partner Logo - Bottom Right */}
-        <div className="absolute bottom-[12.5rem] right-8 z-20">
+        {/* Recognition Badges - Bottom Right */}
+        <div className="absolute bottom-[12.5rem] right-8 z-20 flex flex-col items-end gap-3">
           <img
             src={awsPartnerLogo}
             alt="AWS Partner"
             className="w-20 h-20 object-contain opacity-80 hover:opacity-100 transition-opacity"
           />
+          <a
+            href="https://www.clarksvilleonline.com/2025/12/12/clarksville-area-chamber-of-commerces-veteran-business-of-the-month-altivum-inc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-altivum-silver/60 hover:text-altivum-gold transition-colors text-right"
+          >
+            Veteran Business of the Month
+            <span className="block text-[10px] text-altivum-silver/40">Clarksville Chamber - Dec 2025</span>
+          </a>
         </div>
       </section>
 
