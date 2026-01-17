@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal website for Christian Perez (@thechrisgrey) - Founder & CEO of Altivum Inc., former Green Beret (18D), host of The Vector Podcast, and author of "Beyond the Assessment". Built with React + TypeScript + Vite, styled with Tailwind CSS, deployed on AWS Amplify.
 
+## Reminder
+
+Check `docs/ideas-to-consider.md` for pending feature ideas (portfolio/projects showcase with device mockups or screenshot grid).
+
 ## Development Commands
 
 **Local Development:**
