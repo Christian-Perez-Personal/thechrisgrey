@@ -1,0 +1,10 @@
+{
+  "name": "thechrisgrey-chat-stream",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Streaming chat Lambda for thechrisgrey.com using Bedrock ConverseStream",
+  "main": "index.mjs",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.700.0"
+  }
+}

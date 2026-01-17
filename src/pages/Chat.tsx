@@ -13,19 +13,14 @@ interface Message {
   timestamp: Date;
 }
 
+const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_ENDPOINT;
+
 const initialWelcomeMessage: Message = {
   id: 'welcome',
   role: 'assistant',
   content: "Hey there! I'm an AI assistant here to help you learn about Christian Perez. Feel free to ask about his background, Altivum Inc, The Vector Podcast, or his book \"Beyond the Assessment.\" What would you like to know?",
   timestamp: new Date(),
 };
-
-const mockResponses = [
-  "That's a great question! I'm still being trained on all the details about Christian's background and work. Once I'm fully connected, I'll be able to share specific information about his journey from Green Beret to tech CEO.",
-  "Thanks for your interest! This chat experience is still being developed. Soon I'll be able to provide detailed answers about Altivum Inc's cloud migration and AI integration services.",
-  "I appreciate you asking! When I'm fully operational, I'll be able to tell you all about The Vector Podcast and the insights Christian shares with his guests.",
-  "Good question! I'm currently in development, but once complete I'll be able to share the inspiration behind \"Beyond the Assessment\" and its lessons from Special Forces.",
-];
 
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([initialWelcomeMessage]);
@@ -42,7 +37,7 @@ const Chat = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = (content: string) => {
+  const handleSend = async (content: string) => {
     const userMessage: Message = {
       id: `user-${Date.now()}`,
       role: 'user',
@@ -54,19 +49,71 @@ const Chat = () => {
     setShowSuggestions(false);
     setIsTyping(true);
 
-    // Simulate AI response delay
-    const delay = 1000 + Math.random() * 1500;
-    setTimeout(() => {
-      const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
-      const assistantMessage: Message = {
-        id: `assistant-${Date.now()}`,
+    // Prepare conversation history for API (excluding welcome message)
+    const conversationHistory = [...messages.filter(m => m.id !== 'welcome'), userMessage].map((msg) => ({
+      role: msg.role,
+      content: msg.content,
+    }));
+
+    // Create placeholder for assistant response
+    const assistantMessageId = `assistant-${Date.now()}`;
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: assistantMessageId,
         role: 'assistant',
-        content: randomResponse,
+        content: '',
         timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
-      setIsTyping(false);
-    }, delay);
+      },
+    ]);
+    setIsTyping(false);
+
+    try {
+      const response = await fetch(CHAT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: conversationHistory }),
+      });
+
+      if (!response.ok) throw new Error('Failed to get response');
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (reader) {
+        let done = false;
+        while (!done) {
+          const result = await reader.read();
+          done = result.done;
+
+          if (result.value) {
+            const chunk = decoder.decode(result.value, { stream: true });
+
+            // Append chunk to the assistant message
+            setMessages((prev) =>
+              prev.map((msg) =>
+                msg.id === assistantMessageId
+                  ? { ...msg, content: msg.content + chunk }
+                  : msg
+              )
+            );
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === assistantMessageId
+            ? {
+                ...msg,
+                content:
+                  'I apologize, but I encountered an error. Please try again.',
+              }
+            : msg
+        )
+      );
+    }
   };
 
   const handleSuggestionSelect = (suggestion: string) => {
