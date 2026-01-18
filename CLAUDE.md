@@ -185,7 +185,6 @@ Full-viewport conversational AI experience powered by Amazon Bedrock, Claude Hai
   - Table: `thechrisgrey-chat-ratelimit`
   - Limit: 20 requests/hour per IP (SHA256 hashed)
   - Window: 1 hour, TTL auto-cleanup after 2 hours
-- **Input Validation:** Max 1000 characters per message (frontend + backend)
 - **Cost Monitoring:** CloudWatch alarm `thechrisgrey-bedrock-cost-alarm` triggers at $25/day
 
 **Response Guidelines** (enforced in system prompt):

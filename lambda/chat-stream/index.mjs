@@ -22,7 +22,6 @@ const GUARDRAIL_VERSION = "1";
 const RATE_LIMIT_TABLE = "thechrisgrey-chat-ratelimit";
 const RATE_LIMIT_MAX = 20;
 const RATE_LIMIT_WINDOW = 3600; // 1 hour in seconds
-const MAX_MESSAGE_LENGTH = 1000;
 
 // Base system prompt defining the AI persona
 const BASE_SYSTEM_PROMPT = `You are an AI assistant representing Christian Perez (also known as @thechrisgrey). You help visitors learn about his background, work, and expertise.
@@ -113,9 +112,6 @@ function validateInput(messages) {
   for (const msg of messages) {
     if (!msg || typeof msg.content !== 'string') {
       return { valid: false, error: "Invalid message format." };
-    }
-    if (msg.content.length > MAX_MESSAGE_LENGTH) {
-      return { valid: false, error: `Messages are limited to ${MAX_MESSAGE_LENGTH} characters. Please shorten your message.` };
     }
     if (msg.content.trim().length === 0) {
       return { valid: false, error: "Please enter a message." };

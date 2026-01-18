@@ -102,7 +102,6 @@
 Added comprehensive protection for the AI chat feature:
 - **Bedrock Guardrail** (ID: `5kofhp46ssob`): Content filters for prompt attacks, hate speech, sexual content, violence; denied topics for off-topic requests, illegal activities, professional advice; profanity word filter
 - **DynamoDB Rate Limiting** (Table: `thechrisgrey-chat-ratelimit`): 20 requests/hour per IP with SHA256 hashing, automatic TTL cleanup after 2 hours
-- **Input Validation**: 1000 character limit enforced on both frontend and backend
 - **CloudWatch Cost Alarm**: Alerts when Bedrock costs exceed $25/day
 
 ---

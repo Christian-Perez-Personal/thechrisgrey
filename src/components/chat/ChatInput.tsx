@@ -5,13 +5,9 @@ interface ChatInputProps {
   disabled?: boolean;
 }
 
-const MAX_MESSAGE_LENGTH = 1000;
-
 const ChatInput = ({ onSend, disabled = false }: ChatInputProps) => {
   const [value, setValue] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const isOverLimit = value.length > MAX_MESSAGE_LENGTH;
-  const isNearLimit = value.length > MAX_MESSAGE_LENGTH * 0.8;
 
   const adjustHeight = () => {
     const textarea = textareaRef.current;
@@ -27,7 +23,7 @@ const ChatInput = ({ onSend, disabled = false }: ChatInputProps) => {
 
   const handleSubmit = (e?: FormEvent) => {
     e?.preventDefault();
-    if (value.trim() && !disabled && !isOverLimit) {
+    if (value.trim() && !disabled) {
       onSend(value.trim());
       setValue('');
       if (textareaRef.current) {
@@ -44,7 +40,6 @@ const ChatInput = ({ onSend, disabled = false }: ChatInputProps) => {
   };
 
   const hasValue = value.trim().length > 0;
-  const canSend = hasValue && !disabled && !isOverLimit;
 
   return (
     <div className="border-t border-white/10 bg-altivum-navy/50 backdrop-blur-sm p-4">
@@ -61,11 +56,7 @@ const ChatInput = ({ onSend, disabled = false }: ChatInputProps) => {
             placeholder="Ask me anything..."
             disabled={disabled}
             rows={1}
-            className={`w-full pl-4 pr-12 py-3 bg-white/5 border rounded-xl text-white placeholder-altivum-silver/50 focus:outline-none transition-colors duration-200 resize-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
-              isOverLimit
-                ? 'border-red-500/50 focus:border-red-500'
-                : 'border-white/10 focus:border-altivum-gold'
-            }`}
+            className="w-full pl-4 pr-12 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-altivum-silver/50 focus:outline-none focus:border-altivum-gold transition-colors duration-200 resize-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             style={{
               minHeight: '48px',
               maxHeight: '200px',
@@ -73,9 +64,9 @@ const ChatInput = ({ onSend, disabled = false }: ChatInputProps) => {
           />
           <button
             type="submit"
-            disabled={!canSend}
+            disabled={!hasValue || disabled}
             className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors duration-200 ${
-              canSend
+              hasValue && !disabled
                 ? 'text-altivum-gold hover:text-white'
                 : 'text-altivum-slate/50 cursor-not-allowed'
             }`}
@@ -84,11 +75,6 @@ const ChatInput = ({ onSend, disabled = false }: ChatInputProps) => {
             <span className="material-icons text-xl">send</span>
           </button>
         </div>
-        {isNearLimit && (
-          <div className={`text-xs mt-2 text-right ${isOverLimit ? 'text-red-400' : 'text-altivum-silver/60'}`}>
-            {value.length}/{MAX_MESSAGE_LENGTH}
-          </div>
-        )}
       </form>
     </div>
   );
