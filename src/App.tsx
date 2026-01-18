@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import BeyondTheAssessment from './pages/BeyondTheAssessment';
 import Chat from './pages/Chat';
 import Privacy from './pages/Privacy';
+import NotFound from './pages/NotFound';
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       </main>
       {!isFullscreenPage && <Footer />}
