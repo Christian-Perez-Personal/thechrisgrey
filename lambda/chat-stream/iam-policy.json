@@ -13,6 +13,16 @@
       ]
     },
     {
+      "Sid": "BedrockGuardrail",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:ApplyGuardrail"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:us-east-1:205930636302:guardrail/5kofhp46ssob"
+      ]
+    },
+    {
       "Sid": "BedrockKnowledgeBaseRetrieve",
       "Effect": "Allow",
       "Action": [
@@ -20,6 +30,18 @@
       ],
       "Resource": [
         "arn:aws:bedrock:us-east-1:205930636302:knowledge-base/ARFYABW8HP"
+      ]
+    },
+    {
+      "Sid": "DynamoDBRateLimit",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem"
+      ],
+      "Resource": [
+        "arn:aws:dynamodb:us-east-1:205930636302:table/thechrisgrey-chat-ratelimit"
       ]
     },
     {

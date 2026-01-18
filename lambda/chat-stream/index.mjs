@@ -6,12 +6,23 @@ import {
   BedrockAgentRuntimeClient,
   RetrieveCommand,
 } from "@aws-sdk/client-bedrock-agent-runtime";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { createHash } from "crypto";
 
 const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 const agentClient = new BedrockAgentRuntimeClient({ region: "us-east-1" });
+const dynamoClient = new DynamoDBClient({ region: "us-east-1" });
+const docClient = DynamoDBDocumentClient.from(dynamoClient);
 
 const MODEL_ID = "us.anthropic.claude-haiku-4-5-20251001-v1:0";
 const KNOWLEDGE_BASE_ID = "ARFYABW8HP";
+const GUARDRAIL_ID = "5kofhp46ssob";
+const GUARDRAIL_VERSION = "1";
+const RATE_LIMIT_TABLE = "thechrisgrey-chat-ratelimit";
+const RATE_LIMIT_MAX = 20;
+const RATE_LIMIT_WINDOW = 3600; // 1 hour in seconds
+const MAX_MESSAGE_LENGTH = 1000;
 
 // Base system prompt defining the AI persona
 const BASE_SYSTEM_PROMPT = `You are an AI assistant representing Christian Perez (also known as @thechrisgrey). You help visitors learn about his background, work, and expertise.
@@ -34,6 +45,85 @@ Guidelines:
 - If asked about topics outside your knowledge, briefly redirect to what you do know
 - Never make up information - stick to the facts provided
 - You can mention visiting the website for more details`;
+
+/**
+ * Check rate limit for an IP address
+ * Returns { allowed: boolean, remaining: number }
+ */
+async function checkRateLimit(ip) {
+  const ipHash = createHash('sha256').update(ip || 'unknown').digest('hex');
+  const now = Math.floor(Date.now() / 1000);
+
+  try {
+    const result = await docClient.send(new GetCommand({
+      TableName: RATE_LIMIT_TABLE,
+      Key: { pk: ipHash }
+    }));
+
+    const item = result.Item;
+
+    if (item && (now - item.windowStart) < RATE_LIMIT_WINDOW) {
+      // Within current window
+      if (item.requestCount >= RATE_LIMIT_MAX) {
+        return { allowed: false, remaining: 0 };
+      }
+
+      // Increment counter
+      await docClient.send(new PutCommand({
+        TableName: RATE_LIMIT_TABLE,
+        Item: {
+          pk: ipHash,
+          requestCount: item.requestCount + 1,
+          windowStart: item.windowStart,
+          ttl: item.windowStart + RATE_LIMIT_WINDOW + 3600 // Extra hour buffer for TTL
+        }
+      }));
+
+      return { allowed: true, remaining: RATE_LIMIT_MAX - item.requestCount - 1 };
+    }
+
+    // New window - reset counter
+    await docClient.send(new PutCommand({
+      TableName: RATE_LIMIT_TABLE,
+      Item: {
+        pk: ipHash,
+        requestCount: 1,
+        windowStart: now,
+        ttl: now + RATE_LIMIT_WINDOW + 3600
+      }
+    }));
+
+    return { allowed: true, remaining: RATE_LIMIT_MAX - 1 };
+  } catch (error) {
+    console.error("Rate limit error:", error);
+    // Fail open - allow request if rate limiting fails
+    return { allowed: true, remaining: -1 };
+  }
+}
+
+/**
+ * Validate input messages
+ * Returns { valid: boolean, error?: string }
+ */
+function validateInput(messages) {
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return { valid: false, error: "Please send a message to start our conversation." };
+  }
+
+  for (const msg of messages) {
+    if (!msg || typeof msg.content !== 'string') {
+      return { valid: false, error: "Invalid message format." };
+    }
+    if (msg.content.length > MAX_MESSAGE_LENGTH) {
+      return { valid: false, error: `Messages are limited to ${MAX_MESSAGE_LENGTH} characters. Please shorten your message.` };
+    }
+    if (msg.content.trim().length === 0) {
+      return { valid: false, error: "Please enter a message." };
+    }
+  }
+
+  return { valid: true };
+}
 
 /**
  * Retrieve relevant context from Knowledge Base
@@ -112,11 +202,27 @@ export const handler = awslambda.streamifyResponse(
     }
 
     try {
+      // Get client IP for rate limiting
+      const clientIp = event.requestContext?.http?.sourceIp ||
+                       event.headers?.["x-forwarded-for"]?.split(",")[0] ||
+                       "unknown";
+
+      // Check rate limit
+      const rateLimit = await checkRateLimit(clientIp);
+      if (!rateLimit.allowed) {
+        responseStream.write("You've reached the message limit. Please try again in about an hour.");
+        responseStream.end();
+        return;
+      }
+
+      // Parse request body
       const body = JSON.parse(event.body || "{}");
       const messages = body.messages || [];
 
-      if (messages.length === 0) {
-        responseStream.write("Please send a message to start our conversation.");
+      // Validate input
+      const validation = validateInput(messages);
+      if (!validation.valid) {
+        responseStream.write(validation.error);
         responseStream.end();
         return;
       }
@@ -147,6 +253,11 @@ export const handler = awslambda.streamifyResponse(
           maxTokens: 350,
           temperature: 0.6,
         },
+        guardrailConfig: {
+          guardrailIdentifier: GUARDRAIL_ID,
+          guardrailVersion: GUARDRAIL_VERSION,
+          trace: "enabled"
+        }
       });
 
       const response = await bedrockClient.send(command);
@@ -159,11 +270,32 @@ export const handler = awslambda.streamifyResponse(
             responseStream.write(text);
           }
         }
+
+        // Check for guardrail intervention
+        if (event.metadata?.trace?.guardrail?.action === "INTERVENED") {
+          console.log("Guardrail intervened:", JSON.stringify(event.metadata.trace.guardrail));
+        }
       }
 
       responseStream.end();
     } catch (error) {
       console.error("Error:", error);
+
+      // Handle guardrail interventions
+      if (error.name === "ValidationException" &&
+          error.message?.toLowerCase().includes("guardrail")) {
+        responseStream.write("I'm here to help you learn about Christian Perez and his work. I'm not able to help with that particular request. Is there something about his background or career I can help you with?");
+        responseStream.end();
+        return;
+      }
+
+      // Handle throttling
+      if (error.name === "ThrottlingException" || error.name === "ServiceQuotaExceededException") {
+        responseStream.write("The service is currently busy. Please try again in a moment.");
+        responseStream.end();
+        return;
+      }
+
       responseStream.write(
         "I apologize, but I encountered an error processing your request. Please try again."
       );

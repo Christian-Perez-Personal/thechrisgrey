@@ -176,12 +176,24 @@ Full-viewport conversational AI experience powered by Amazon Bedrock, Claude Hai
 - Function URL: streaming enabled with CORS for thechrisgrey.com
 - Lambda execution role: `thechrisgrey-chat-stream-role`
 
+**Guardrails & Rate Limiting:**
+- **Bedrock Guardrail ID:** `5kofhp46ssob` (version 1)
+  - Content filters: PROMPT_ATTACK (HIGH), HATE, INSULTS, SEXUAL (HIGH), VIOLENCE, MISCONDUCT (MEDIUM)
+  - Denied topics: Off-topic technical support, illegal activities, professional advice
+  - Profanity word filter enabled
+- **Rate Limiting:** DynamoDB-based per-IP tracking
+  - Table: `thechrisgrey-chat-ratelimit`
+  - Limit: 20 requests/hour per IP (SHA256 hashed)
+  - Window: 1 hour, TTL auto-cleanup after 2 hours
+- **Input Validation:** Max 1000 characters per message (frontend + backend)
+- **Cost Monitoring:** CloudWatch alarm `thechrisgrey-bedrock-cost-alarm` triggers at $25/day
+
 **Response Guidelines** (enforced in system prompt):
 - Plain text only - NO markdown (no bold, italics, headers, bullet lists)
 - Conversational flowing paragraphs, not document-style
 - Concise: 2-3 sentences for simple questions, 4-6 max for complex
 - Synthesize information naturally, don't list every detail
-- `maxTokens: 512`, `temperature: 0.6`
+- `maxTokens: 350`, `temperature: 0.6`
 
 **Knowledge Base (RAG)**:
 - Knowledge Base ID: `ARFYABW8HP`
@@ -198,7 +210,7 @@ Full-viewport conversational AI experience powered by Amazon Bedrock, Claude Hai
 **Files:**
 - `lambda/chat-stream/index.mjs`: Lambda handler with KB retrieval + streaming
 - `lambda/chat-stream/iam-policy.json`: IAM policy for Bedrock + KB access
-- `lambda/chat-stream/package.json`: Dependencies (bedrock-runtime, bedrock-agent-runtime)
+- `lambda/chat-stream/package.json`: Dependencies (bedrock-runtime, bedrock-agent-runtime, dynamodb)
 
 **Deployment:**
 ```bash

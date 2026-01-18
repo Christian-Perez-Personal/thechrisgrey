@@ -40,25 +40,6 @@
 
 ---
 
-### AI Chat Guardrails & Rate Limiting
-**Priority:** High
-**Effort:** Medium
-**Why:** Prevent abuse of the AI chat feature. Without limits, bad actors could rack up Bedrock costs or use the chat for unintended purposes.
-
-**Implementation:**
-- **Rate Limiting:** Limit requests per IP (e.g., 20 requests/hour)
-  - Option A: API Gateway with usage plans
-  - Option B: Lambda-level tracking with DynamoDB
-  - Option C: CloudFront + WAF rate limiting
-- **Bedrock Guardrails:** Use AWS Bedrock Guardrails to filter:
-  - Prompt injection attempts
-  - Off-topic requests (keep focused on Christian's content)
-  - Harmful/inappropriate content
-- **Input validation:** Max message length, sanitization
-- **Cost alerts:** CloudWatch alarm if Bedrock spend exceeds threshold
-
----
-
 ## Nice to Have
 
 ### Speaking/Media Page
@@ -113,6 +94,18 @@
 ---
 
 ## Completed
+
+### AI Chat Guardrails & Rate Limiting - IMPLEMENTED
+
+**Status:** Implemented on January 18, 2026
+
+Added comprehensive protection for the AI chat feature:
+- **Bedrock Guardrail** (ID: `5kofhp46ssob`): Content filters for prompt attacks, hate speech, sexual content, violence; denied topics for off-topic requests, illegal activities, professional advice; profanity word filter
+- **DynamoDB Rate Limiting** (Table: `thechrisgrey-chat-ratelimit`): 20 requests/hour per IP with SHA256 hashing, automatic TTL cleanup after 2 hours
+- **Input Validation**: 1000 character limit enforced on both frontend and backend
+- **CloudWatch Cost Alarm**: Alerts when Bedrock costs exceed $25/day
+
+---
 
 ### Privacy Policy Page - IMPLEMENTED
 
