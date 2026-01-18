@@ -30,18 +30,6 @@
 
 ---
 
-### Reading Progress Bar
-**Priority:** Low
-**Effort:** Low
-**Why:** Visual indicator showing scroll progress on blog posts. Common modern touch that improves reading experience.
-
-**Implementation:**
-- Fixed bar at top of viewport on blog posts
-- Width based on scroll percentage
-- Use `altivum-gold` color for consistency
-
----
-
 ### Print Styles for Blog
 **Priority:** Low
 **Effort:** Low
@@ -55,21 +43,30 @@
 
 ---
 
-### security.txt File
-**Priority:** Low
-**Effort:** Very Low
-**Why:** Standard file at `/.well-known/security.txt` for security researchers to report vulnerabilities. Professional touch.
-
-**Implementation:**
-- Create `public/.well-known/security.txt`
-- Include contact email and optional PGP key
-- Reference: https://securitytxt.org/
-
----
-
----
-
 ## Completed
+
+### Reading Progress Bar - IMPLEMENTED
+
+**Status:** Implemented on January 18, 2026
+
+Added gold progress bar to blog posts:
+- 3px `altivum-gold` bar fixed at top of viewport
+- Fills 0-100% as user scrolls through article
+- Throttled with requestAnimationFrame for performance
+- Component: `src/components/ReadingProgressBar.tsx`
+
+---
+
+### security.txt - IMPLEMENTED
+
+**Status:** Implemented on January 18, 2026
+
+Added security.txt for vulnerability reporting:
+- Location: `/.well-known/security.txt`
+- Contact: admin@altivum.ai
+- Expires: January 18, 2027
+
+---
 
 ### Custom 404 Page - IMPLEMENTED
 

@@ -14,6 +14,7 @@ import {
   type SanityPost,
   type SanityPostPreview
 } from '../sanity';
+import ReadingProgressBar from '../components/ReadingProgressBar';
 
 /**
  * Extract word count from Portable Text blocks
@@ -149,6 +150,7 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-altivum-dark">
+      <ReadingProgressBar />
       <SEO
         title={post.seoTitle || post.title}
         description={post.seoDescription || post.excerpt}

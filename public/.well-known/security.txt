@@ -1,0 +1,4 @@
+Contact: mailto:admin@altivum.ai
+Expires: 2027-01-18T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://thechrisgrey.com/.well-known/security.txt
