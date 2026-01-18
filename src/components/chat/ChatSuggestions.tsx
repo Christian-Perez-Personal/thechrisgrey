@@ -3,10 +3,10 @@ interface ChatSuggestionsProps {
 }
 
 const suggestions = [
-  "What's your background?",
-  "Tell me about Altivum",
-  "What's The Vector Podcast about?",
-  "What inspired your book?",
+  "How did he go from Green Beret to tech CEO?",
+  "What drives Altivum's mission?",
+  "Why did he write Beyond the Assessment?",
+  "What's his take on AI and veterans?",
 ];
 
 const ChatSuggestions = ({ onSelect }: ChatSuggestionsProps) => {
