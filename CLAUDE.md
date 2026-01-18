@@ -167,20 +167,33 @@ Full-viewport conversational AI experience powered by Amazon Bedrock, Claude Hai
 - Messages scroll within container, input stays anchored at bottom
 - Real-time streaming responses via fetch + ReadableStream
 - Components in `src/components/chat/`: `ChatMessage`, `ChatInput`, `ChatSuggestions`, `TypingIndicator`
+- Suggested prompts use third person ("How did he..." not "What's your...")
 
 **Backend** (`lambda/chat-stream/`):
 - Lambda function with streaming response via `awslambda.streamifyResponse()`
 - Uses Bedrock ConverseStream API with Claude Haiku 4.5 (`us.anthropic.claude-haiku-4-5-20251001-v1:0`)
 - RAG-enhanced via Bedrock Knowledge Base retrieval before each response
 - Function URL: streaming enabled with CORS for thechrisgrey.com
+- Lambda execution role: `thechrisgrey-chat-stream-role`
+
+**Response Guidelines** (enforced in system prompt):
+- Plain text only - NO markdown (no bold, italics, headers, bullet lists)
+- Conversational flowing paragraphs, not document-style
+- Concise: 2-3 sentences for simple questions, 4-6 max for complex
+- Synthesize information naturally, don't list every detail
+- `maxTokens: 512`, `temperature: 0.6`
 
 **Knowledge Base (RAG)**:
 - Knowledge Base ID: `ARFYABW8HP`
-- Data Source: `s3://thechrisgrey-kb-source/` (us-east-1)
-- Vector Store: S3 Vectors (`thechrisgrey-vectors` bucket, `autobiography-index`)
-- Embeddings: Amazon Titan Text Embeddings v2 (1024 dimensions)
+- Data Source ID: `TXQTRAJOSD`
+- Source Bucket: `s3://thechrisgrey-kb-source/` (us-east-1)
+- Vector Store: S3 Vectors (cost-effective alternative to OpenSearch Serverless)
+  - Vector Bucket: `thechrisgrey-vectors`
+  - Vector Index: `autobiography-index`
+  - Non-filterable metadata keys: `AMAZON_BEDROCK_TEXT`, `AMAZON_BEDROCK_METADATA`
+- Embeddings: Amazon Titan Text Embeddings v2 (1024 dimensions, cosine distance)
 - Retrieves 5 most relevant chunks for each user query
-- Context injected into system prompt for accurate, detailed responses
+- IAM Role: `TheChrisGreyKnowledgeBaseRole`
 
 **Files:**
 - `lambda/chat-stream/index.mjs`: Lambda handler with KB retrieval + streaming
@@ -201,6 +214,8 @@ aws lambda update-function-code --function-name thechrisgrey-chat-stream --zip-f
 ```bash
 aws bedrock-agent start-ingestion-job --knowledge-base-id ARFYABW8HP --data-source-id TXQTRAJOSD --region us-east-1
 ```
+
+**S3 Vectors Note:** When creating the vector index, you MUST configure `AMAZON_BEDROCK_TEXT` and `AMAZON_BEDROCK_METADATA` as non-filterable metadata keys. Without this, ingestion fails with "Filterable metadata must have at most 2048 bytes" because text chunks exceed the 2KB filterable limit.
 
 ### Dynamic Sitemap
 
