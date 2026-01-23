@@ -23,13 +23,13 @@ npm run lint         # Run ESLint on TypeScript files
 
 **Deployment:**
 - Pushing to `main` branch automatically triggers AWS Amplify deployment
-- Amplify App ID: `d3hadhsxdvuyai` (us-east-2)
+- Amplify App ID: `dv3g3860t7qiz` (us-east-2)
 - Amplify uses `amplify.yml` configuration (runs `npm ci` then `npm run build`)
 - Build artifacts from `dist/` directory are deployed
 
 **Manual Amplify Rebuild:**
 ```bash
-aws amplify start-job --app-id d3hadhsxdvuyai --branch-name main --job-type RELEASE --region us-east-2
+aws amplify start-job --app-id dv3g3860t7qiz --branch-name main --job-type RELEASE --region us-east-2
 ```
 
 ## Architecture
