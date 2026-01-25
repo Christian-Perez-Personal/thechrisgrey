@@ -275,11 +275,13 @@ The Contact page (`/contact`) combines contact form with speaking/media informat
 - Entrepreneurship
 - Leadership (Special Operations lessons)
 
-**Press Kit** (`public/press-kit/`):
-- `README.txt`: Guide for what to include
-- `headshots/`: High-res photos for event promoters
-- `logos/`: Brand logos
-- Add bios and materials as needed
+**Press Kit** (`public/press-kit/` and `public/press-kit.zip`):
+- Downloadable zip linked from Contact page "Download Press Kit" button
+- `headshots/`: Professional, Casual, Military headshots (PNG)
+- `logos/`: White, Black, @thechrisgrey, The Vector Podcast logos (PNG)
+- `bios/`: Short (~100 words) and long (~400 words) bios
+- `christian-perez-fact-sheet.pdf`: Key facts and credentials
+- `speaking-topics.pdf`: Speaking topic descriptions
 
 ### Blog Features
 
@@ -305,14 +307,54 @@ The Contact page (`/contact`) combines contact form with speaking/media informat
   - Root-level images in `public/` are excluded from optimization via `vite.config.ts`
 - The profile image (`profile1.jpeg`) is in `public/` for maximum quality on home page
 
+### Accessibility
+
+**Focus Management:**
+- `useFocusTrap` hook (`src/hooks/useFocusTrap.ts`) - traps Tab key within modals, returns focus on close
+- Modals use `role="dialog"`, `aria-modal="true"`, `aria-labelledby`
+- Chat messages container has `aria-live="polite"` for screen reader announcements
+
+**Keyboard Navigation:**
+- About dropdown supports Arrow keys (up/down), Escape to close
+- All interactive elements have `focus-visible` outlines (gold, 2px)
+- Skip-to-content link for keyboard users
+
+**Focus Styles** (in `src/index.css`):
+- `focus-visible` shows gold outline only on keyboard navigation
+- Mouse clicks don't show focus rings
+
+### Error Handling
+
+**ErrorBoundary** (`src/components/ErrorBoundary.tsx`):
+- Wraps Routes in App.tsx to catch render errors
+- Shows friendly error page with Refresh/Go Home options
+- In development mode, shows collapsible error details
+- Navigation remains visible on error
+
+### Analytics
+
+**Cloudflare Web Analytics:**
+- Privacy-friendly (no cookies, no personal data)
+- Script in `index.html` before closing `</body>`
+- Dashboard: Cloudflare → Analytics & Logs → Web Analytics
+
+### Utilities
+
+**Validators** (`src/utils/validators.ts`):
+- `isValidEmail(email)` - shared email validation
+- `EMAIL_REGEX` - exported regex pattern
+
 ## Key Files
 
 - `tailwind.config.js`: Custom colors, fonts, animations
 - `src/utils/typography.ts`: Centralized typography system
 - `src/utils/schemas.ts`: Schema.org structured data builders for SEO/AEO
+- `src/utils/validators.ts`: Shared validation functions (email)
 - `src/constants/links.ts`: Centralized social media and external links
 - `src/components/Navigation.tsx`: Fixed nav with scroll-based transparency and dropdown menu
 - `src/components/SEO.tsx`: SEO/metadata management with structured data
+- `src/components/ErrorBoundary.tsx`: Graceful error handling for render errors
+- `src/hooks/useFocusTrap.ts`: Focus trap hook for modals
 - `src/pages/Home.tsx`: Complex scroll animations and sticky sections
 - `src/pages/Chat.tsx`: Full-viewport AI chat experience
 - `src/components/chat/`: Chat UI components (ChatMessage, ChatInput, ChatSuggestions, TypingIndicator)
@@ -325,8 +367,9 @@ The Contact page (`/contact`) combines contact form with speaking/media informat
 - `src/pages/NotFound.tsx`: Custom 404 page
 - `public/.well-known/security.txt`: Security vulnerability reporting contact
 - `public/press-kit/`: Press materials for event organizers (headshots, bios, logos)
+- `public/press-kit.zip`: Downloadable press kit (linked from Contact page)
 - `amplify.yml`: AWS Amplify build configuration
-- `index.html`: Material Icons CDN link, favicon, RSS auto-discovery, base meta tags
+- `index.html`: Material Icons CDN, Cloudflare Analytics, favicon, RSS auto-discovery
 
 ## Environment Variables
 
