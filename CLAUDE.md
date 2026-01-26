@@ -247,6 +247,13 @@ aws bedrock-agent start-ingestion-job --knowledge-base-id ARFYABW8HP --data-sour
 
 **S3 Vectors Note:** When creating the vector index, you MUST configure `AMAZON_BEDROCK_TEXT` and `AMAZON_BEDROCK_METADATA` as non-filterable metadata keys. Without this, ingestion fails with "Filterable metadata must have at most 2048 bytes" because text chunks exceed the 2KB filterable limit.
 
+**Model Invocation Logging:**
+- Log Group: `tcg-AI-chat` (us-east-1, 7-day retention)
+- IAM Role: `thechrisgrey-bedrock-logging-role`
+- Logs include full text data (questions and responses)
+- Token usage captured for cost analysis
+- See `docs/bedrock-logging-queries.md` for CloudWatch Logs Insights queries
+
 ### Dynamic Sitemap & RSS Feed
 
 **Sitemap** generated at build time via `scripts/generate-sitemap.js`:
@@ -361,6 +368,7 @@ The Contact page (`/contact`) combines contact form with speaking/media informat
 - `src/sanity/`: Sanity CMS client, queries, types for blog
 - `lambda/chat-stream/`: Bedrock streaming Lambda function for AI chat
 - `lambda/kb-sync/`: Lambda triggered by S3 to auto-sync Knowledge Base
+- `docs/bedrock-logging-queries.md`: CloudWatch Logs Insights queries for chat analytics
 - `scripts/generate-sitemap.js`: Build-time sitemap generator
 - `scripts/generate-rss.js`: Build-time RSS feed generator
 - `src/components/ReadingProgressBar.tsx`: Scroll progress indicator for blog posts
