@@ -83,25 +83,6 @@ const Podcast = () => {
         </div>
       </section>
 
-      {/* Spotify Embed Section */}
-      <section className="py-16 bg-altivum-dark border-t border-white/5">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <div className="rounded-xl overflow-hidden">
-            <iframe
-              src={SPOTIFY_EMBED_URL}
-              width="100%"
-              height="352"
-              frameBorder="0"
-              allowFullScreen
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              title="The Vector Podcast on Spotify"
-              className="rounded-xl"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Latest Episode - YouTube Embed */}
       <section className="py-24 bg-altivum-dark border-t border-white/5">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
@@ -151,6 +132,25 @@ const Podcast = () => {
               </p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Spotify Embed Section */}
+      <section className="py-16 bg-altivum-dark border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <div className="rounded-xl overflow-hidden">
+            <iframe
+              src={SPOTIFY_EMBED_URL}
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title="The Vector Podcast on Spotify"
+              className="rounded-xl"
+            />
+          </div>
         </div>
       </section>
 
