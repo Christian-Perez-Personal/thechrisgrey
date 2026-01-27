@@ -1,10 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { SEO } from '../components/SEO';
 import { typography } from '../utils/typography';
 import ChatMessage from '../components/chat/ChatMessage';
 import ChatInput from '../components/chat/ChatInput';
 import ChatSuggestions from '../components/chat/ChatSuggestions';
 import TypingIndicator from '../components/chat/TypingIndicator';
+import ErrorBoundary from '../components/ErrorBoundary';
+import { ChatErrorFallback } from '../components/ErrorFallbacks';
+import { useSessionStorage } from '../hooks';
 
 interface Message {
   id: string;
@@ -14,6 +17,7 @@ interface Message {
 }
 
 const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_ENDPOINT;
+const CHAT_STORAGE_KEY = 'chat-messages';
 
 const initialWelcomeMessage: Message = {
   id: 'welcome',
@@ -22,11 +26,22 @@ const initialWelcomeMessage: Message = {
   timestamp: new Date(),
 };
 
-const Chat = () => {
-  const [messages, setMessages] = useState<Message[]>([initialWelcomeMessage]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(true);
+const ChatContent = () => {
+  const [messages, setMessages, clearMessages] = useSessionStorage<Message[]>(
+    CHAT_STORAGE_KEY,
+    [initialWelcomeMessage]
+  );
+  const [isTyping, setIsTyping] = useSessionStorage<boolean>('chat-typing', false);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+  // Show suggestions only if no user messages exist yet
+  const hasUserMessages = messages.some((m) => m.role === 'user');
+  const showSuggestions = !hasUserMessages;
+
+  // Clear conversation handler
+  const handleClearConversation = useCallback(() => {
+    clearMessages();
+  }, [clearMessages]);
   const scrollToBottom = () => {
     // Scroll within the messages container, not the whole page
     if (messagesContainerRef.current) {
@@ -53,7 +68,6 @@ const Chat = () => {
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    setShowSuggestions(false);
     setIsTyping(true);
 
     // Prepare conversation history for API (excluding welcome message)
@@ -142,13 +156,25 @@ const Chat = () => {
 
       {/* Header */}
       <div className="border-b border-white/10 bg-altivum-dark/80 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-6 py-6">
-          <h1 className="text-white mb-2" style={typography.cardTitleLarge}>
-            AI Chat
-          </h1>
-          <p className="text-altivum-silver" style={typography.smallText}>
-            Ask me anything about Christian's background, Altivum, the podcast, or his book.
-          </p>
+        <div className="max-w-4xl mx-auto px-6 py-6 flex items-start justify-between">
+          <div>
+            <h1 className="text-white mb-2" style={typography.cardTitleLarge}>
+              AI Chat
+            </h1>
+            <p className="text-altivum-silver" style={typography.smallText}>
+              Ask me anything about Christian's background, Altivum, the podcast, or his book.
+            </p>
+          </div>
+          {hasUserMessages && (
+            <button
+              onClick={handleClearConversation}
+              className="flex items-center gap-2 px-4 py-2 text-altivum-silver hover:text-white border border-white/20 hover:border-white/40 rounded transition-colors duration-200 text-sm"
+              aria-label="Clear conversation"
+            >
+              <span className="material-icons text-base">refresh</span>
+              <span className="hidden sm:inline">Clear</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -186,6 +212,27 @@ const Chat = () => {
       {/* Input Area */}
       <ChatInput onSend={handleSend} disabled={isTyping} />
     </div>
+  );
+};
+
+// Clear chat storage on error reset
+const handleChatErrorReset = () => {
+  if (typeof window !== 'undefined') {
+    window.sessionStorage.removeItem(CHAT_STORAGE_KEY);
+    window.sessionStorage.removeItem('chat-typing');
+  }
+};
+
+const Chat = () => {
+  return (
+    <ErrorBoundary
+      fallback={<ChatErrorFallback onRetry={handleChatErrorReset} />}
+      onReset={handleChatErrorReset}
+      showHomeButton={false}
+      pageName="Chat"
+    >
+      <ChatContent />
+    </ErrorBoundary>
   );
 };
 

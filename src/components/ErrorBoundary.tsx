@@ -4,6 +4,10 @@ import { typography } from '../utils/typography';
 
 interface Props {
   children: ReactNode;
+  fallback?: ReactNode;
+  onReset?: () => void;
+  showHomeButton?: boolean;
+  pageName?: string;
 }
 
 interface State {
@@ -26,11 +30,23 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   handleReset = () => {
+    this.props.onReset?.();
     this.setState({ hasError: false, error: null });
   };
 
   render() {
+    const { showHomeButton = true, pageName, fallback } = this.props;
+
     if (this.state.hasError) {
+      // Use custom fallback if provided
+      if (fallback) {
+        return fallback;
+      }
+
+      const errorTitle = pageName
+        ? `Something went wrong with ${pageName}`
+        : 'Something went wrong';
+
       return (
         <div className="min-h-screen bg-altivum-dark flex items-center justify-center px-6">
           <div className="max-w-md w-full text-center">
@@ -39,27 +55,32 @@ class ErrorBoundary extends Component<Props, State> {
             </div>
 
             <h1 className="text-white mb-4" style={typography.sectionHeader}>
-              Something went wrong
+              {errorTitle}
             </h1>
 
             <p className="text-altivum-silver mb-8" style={typography.bodyText}>
-              We encountered an unexpected error. Please try refreshing the page or return to the home page.
+              We encountered an unexpected error. Please try refreshing the page{showHomeButton ? ' or return to the home page' : ''}.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => window.location.reload()}
+                onClick={() => {
+                  this.handleReset();
+                  window.location.reload();
+                }}
                 className="px-6 py-3 bg-altivum-gold text-altivum-dark font-medium uppercase tracking-wider text-sm hover:bg-white transition-colors duration-300"
               >
                 Refresh Page
               </button>
-              <Link
-                to="/"
-                onClick={this.handleReset}
-                className="px-6 py-3 border border-altivum-gold text-altivum-gold font-medium uppercase tracking-wider text-sm hover:bg-altivum-gold hover:text-altivum-dark transition-colors duration-300"
-              >
-                Go Home
-              </Link>
+              {showHomeButton && (
+                <Link
+                  to="/"
+                  onClick={this.handleReset}
+                  className="px-6 py-3 border border-altivum-gold text-altivum-gold font-medium uppercase tracking-wider text-sm hover:bg-altivum-gold hover:text-altivum-dark transition-colors duration-300"
+                >
+                  Go Home
+                </Link>
+              )}
             </div>
 
             {process.env.NODE_ENV === 'development' && this.state.error && (

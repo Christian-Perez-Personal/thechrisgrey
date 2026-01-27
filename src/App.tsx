@@ -3,6 +3,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import ErrorBoundary from './components/ErrorBoundary';
+import { BlogErrorFallback } from './components/ErrorFallbacks';
 import Home from './pages/Home';
 import About from './pages/About';
 import Altivum from './pages/Altivum';
@@ -32,8 +33,22 @@ function App() {
             <Route path="/altivum" element={<Altivum />} />
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/beyond-the-assessment" element={<BeyondTheAssessment />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route
+              path="/blog"
+              element={
+                <ErrorBoundary fallback={<BlogErrorFallback />} pageName="Blog">
+                  <Blog />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/blog/:slug"
+              element={
+                <ErrorBoundary fallback={<BlogErrorFallback />} pageName="Blog Post">
+                  <BlogPost />
+                </ErrorBoundary>
+              }
+            />
             <Route path="/links" element={<Links />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/chat" element={<Chat />} />

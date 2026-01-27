@@ -175,6 +175,11 @@ Full-viewport conversational AI experience powered by Amazon Bedrock, Claude Hai
 - Real-time streaming responses via fetch + ReadableStream
 - Components in `src/components/chat/`: `ChatMessage`, `ChatInput`, `ChatSuggestions`, `TypingIndicator`
 - Suggested prompts use third person ("How did he..." not "What's your...")
+- **Conversation Persistence:** Messages saved to sessionStorage (key: `chat-messages`)
+  - Survives page refresh within same browser session
+  - Auto-clears when browser closes (privacy-friendly)
+  - "Clear" button in header resets conversation
+- **Error Boundary:** Wrapped with `ChatErrorFallback` for graceful error recovery
 
 **Backend** (`lambda/chat-stream/`):
 - Lambda function with streaming response via `awslambda.streamifyResponse()`
@@ -333,10 +338,22 @@ The Contact page (`/contact`) combines contact form with speaking/media informat
 ### Error Handling
 
 **ErrorBoundary** (`src/components/ErrorBoundary.tsx`):
-- Wraps Routes in App.tsx to catch render errors
+- Global boundary wraps all Routes in App.tsx as safety net
+- Page-level boundaries wrap high-risk routes (Blog, BlogPost, Chat)
 - Shows friendly error page with Refresh/Go Home options
 - In development mode, shows collapsible error details
 - Navigation remains visible on error
+
+**Enhanced Props:**
+- `fallback`: Custom fallback UI component
+- `onReset`: Callback for page-specific cleanup (e.g., clear sessionStorage)
+- `showHomeButton`: Optional home navigation (default: true, false for full-viewport pages)
+- `pageName`: Contextual error messaging
+
+**Page-Specific Fallbacks** (`src/components/ErrorFallbacks.tsx`):
+- `BlogErrorFallback`: "Unable to load blog" with retry button
+- `ChatErrorFallback`: Full-viewport layout matching Chat page (no Home button)
+- `GenericPageErrorFallback`: Reusable default with optional page name
 
 ### Analytics
 
@@ -360,8 +377,10 @@ The Contact page (`/contact`) combines contact form with speaking/media informat
 - `src/constants/links.ts`: Centralized social media and external links
 - `src/components/Navigation.tsx`: Fixed nav with scroll-based transparency and dropdown menu
 - `src/components/SEO.tsx`: SEO/metadata management with structured data
-- `src/components/ErrorBoundary.tsx`: Graceful error handling for render errors
+- `src/components/ErrorBoundary.tsx`: Graceful error handling for render errors (supports page-level boundaries)
+- `src/components/ErrorFallbacks.tsx`: Page-specific error fallback components
 - `src/hooks/useFocusTrap.ts`: Focus trap hook for modals
+- `src/hooks/useSessionStorage.ts`: Generic sessionStorage hook with JSON serialization and Date revival
 - `src/pages/Home.tsx`: Complex scroll animations and sticky sections
 - `src/pages/Chat.tsx`: Full-viewport AI chat experience
 - `src/components/chat/`: Chat UI components (ChatMessage, ChatInput, ChatSuggestions, TypingIndicator)
