@@ -1,0 +1,165 @@
+AI Chat Cost Analysis: thechrisgrey.com
+========================================
+
+Your Implementation Details
+---------------------------
+Based on lambda/chat-stream/index.mjs:
+- Model: Claude Haiku 4.5 (cross-region inference)
+- Max output tokens: 350 per response
+- Knowledge Base: 5 chunks retrieved per query
+- Embeddings: Titan Text Embeddings V2 (1024 dimensions)
+- Vector Store: S3 Vectors
+- Guardrails: Content filters + Denied topics enabled
+- Rate Limit: 20 requests/hour per IP
+
+
+PER-REQUEST COST BREAKDOWN
+==========================
+
+Component                      Calculation                                          Cost per Request
+---------                      -----------                                          ----------------
+Claude Haiku 4.5 (Input)       ~800 tokens (system prompt + context + history)      $0.0008
+                               x $0.001/1K tokens
+
+Claude Haiku 4.5 (Output)      ~200 tokens avg x $0.005/1K tokens                   $0.0010
+
+Titan Embeddings V2            ~50 tokens (user query) x $0.00002/1K tokens         $0.000001
+
+S3 Vectors Query               1 query + data processing (~1KB index)               ~$0.000003
+
+Bedrock Guardrails             ~2K chars (input+output) x $0.15/1K text units       $0.0006
+                               x 2 policies (content filters + denied topics)
+
+Lambda                         ~5 sec x 128MB = 0.64 GB-sec x $0.0000166667         $0.000011
+
+DynamoDB                       1 read + 1 write (~$0.25/1M + $1.25/1M)              $0.0000015
+
+------------------------------------------------------------------------------------------
+TOTAL PER REQUEST                                                                   ~$0.0024
+==========================================================================================
+
+
+MONTHLY COST PROJECTIONS
+========================
+
+Usage Level              Requests/Month       Estimated Cost
+-----------              --------------       --------------
+Low (personal site)      100                  $0.24
+Moderate                 1,000                $2.40
+Active                   5,000                $12.00
+High traffic             20,000               $48.00
+Very high                100,000              $240.00
+
+
+COMPONENT-BY-COMPONENT BREAKDOWN
+================================
+
+1. Claude Haiku 4.5 (Bedrock) - ~75% of cost
+--------------------------------------------
+Pricing Tier          Input              Output
+------------          -----              ------
+Global endpoints      $0.001/1K tokens   $0.005/1K tokens
+Regional endpoints    $0.0011/1K tokens  $0.0055/1K tokens
+
+Your system prompt is ~500 tokens, retrieved context adds ~200-300 tokens,
+conversation history grows over time. Output is capped at 350 tokens but
+typically uses ~200.
+
+Cost driver: Longer conversations = higher input costs (full history sent each request)
+
+
+2. Bedrock Guardrails - ~25% of cost
+------------------------------------
+Policy              Price
+------              -----
+Content Filters     $0.15/1K text units
+Denied Topics       $0.15/1K text units
+Word Filters        Free
+
+You have both content filters and denied topics enabled, so both are charged.
+A text unit = 1,000 characters.
+
+
+3. Knowledge Base (RAG) - Minimal
+---------------------------------
+Component                 Price
+---------                 -----
+Titan Embeddings V2       $0.00002/1K tokens
+S3 Vectors storage        $0.06/GB/month
+S3 Vectors queries        $2.50/1M API calls + data processing
+
+Your autobiography document is small (~50KB), so storage is essentially free
+(<$0.01/month). Embedding happens at ingestion, not per query.
+
+
+4. Lambda + DynamoDB - Negligible
+---------------------------------
+Both fall well within free tier for typical usage:
+- Lambda: 1M requests + 400K GB-seconds free/month
+- DynamoDB: First 25 GB storage free, reads/writes pennies at low volume
+
+
+COST OPTIMIZATION OPPORTUNITIES
+===============================
+
+1. Conversation length: Your current setup sends full history. Consider
+   summarizing older messages to reduce input tokens.
+
+2. Guardrails: At $0.30/1K text units combined, guardrails are ~25% of
+   per-request cost. If you trust your rate limiting and model constraints,
+   you could consider reducing policies.
+
+3. Prompt caching: Claude supports prompt caching (up to 90% savings on
+   cached portions). Your static system prompt could benefit.
+
+4. Batch API: Not applicable for real-time chat, but useful for
+   analytics/reporting jobs.
+
+
+COMPARISON: WHAT OTHERS WOULD PAY
+=================================
+
+Startup Costs (One-time)
+------------------------
+Knowledge Base setup           $0 (no base fee)
+S3 Vectors index creation      $0
+Lambda deployment              $0
+--------------------------------------
+Total setup                    $0
+
+
+Ongoing Fixed Costs (Monthly)
+-----------------------------
+S3 Vectors storage (<1GB)      ~$0.06
+CloudWatch Logs (7-day)        ~$0.50
+--------------------------------------
+Total fixed                    ~$0.56/month
+
+Variable costs scale linearly with usage at ~$0.0024/request.
+
+
+BOTTOM LINE
+===========
+
+Your AI chat costs approximately $0.0024 per conversation turn, with ~75%
+going to Claude Haiku 4.5 inference and ~25% to Guardrails. For a personal
+website with moderate traffic (1,000-5,000 requests/month), expect $2-12/month.
+
+The architecture is highly cost-efficient compared to alternatives:
+- OpenSearch Serverless for vectors would add ~$700/month minimum
+- Using Claude Sonnet would be 5-10x more expensive per token
+- Self-hosted solutions would require significant infrastructure costs
+
+
+SOURCES
+=======
+- Amazon Bedrock Pricing: https://aws.amazon.com/bedrock/pricing/
+- Claude API Pricing: https://platform.claude.com/docs/en/about-claude/pricing
+- S3 Vectors Pricing Deep Dive: https://murraycole.com/posts/aws-s3-vectors-pricing-deep-dive
+- Bedrock Guardrails Price Reduction: https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-bedrock-guardrails-reduces-pricing-85-percent/
+- DynamoDB On-Demand Pricing: https://aws.amazon.com/dynamodb/pricing/on-demand/
+- AWS Lambda Pricing: https://aws.amazon.com/lambda/pricing/
+- Demystifying Amazon Bedrock Pricing: https://aws.amazon.com/blogs/machine-learning/demystifying-amazon-bedrock-pricing-for-a-chatbot-assistant/
+
+
+Generated: January 28, 2026
